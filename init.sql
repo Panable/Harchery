@@ -6,6 +6,7 @@ Drop Table if exists Arrow;
 Drop Table if exists RoundRecord;
 Drop Table if exists Archer;
 Drop Table if exists Club;
+Drop Table if exists CompetitionDetails;
 
 CREATE TABLE Competition (
     ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -15,7 +16,7 @@ CREATE TABLE Competition (
 CREATE TABLE Class (
 	AgeGroup VARCHAR(255),
 	Gender VARCHAR(255),
-	CONSTRAINT Category PRIMARY KEY (AgeGroup, Gender)
+	PRIMARY KEY (AgeGroup, Gender)
 );
 CREATE TABLE Division (
 	Equipment VARCHAR(255) PRIMARY KEY
@@ -53,3 +54,15 @@ CREATE TABLE Club (
 	State VARCHAR(255)
 );
 
+CREATE TABLE CompetitionDetails (
+	CompetitionID INT,
+	AgeGroup VARCHAR(255),
+	Gender VARCHAR(255),
+	Equipment VARCHAR(255),
+	RoundID INT,
+	FOREIGN KEY (CompetitionID) REFERENCES Competition(ID),
+	FOREIGN KEY (AgeGroup) REFERENCES Class(AgeGroup),
+	FOREIGN KEY (Gender) REFERENCES Class(Gender),
+	FOREIGN KEY (Equipment) REFERENCES Division(Equipment),
+	FOREIGN KEY (RoundID) REFERENCES `Round`(ID)
+);

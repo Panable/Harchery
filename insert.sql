@@ -83,4 +83,9 @@ INSERT INTO CompetitionRecord (RoundRecordID, CompetitionID) VALUES
 (2, 1),
 (3, 2);
 
+INSERT INTO Championship (ClubID, CompetitionID) VALUES
+(1, 1),
+(2, 2),
+(3, 3);
+
 SET FOREIGN_KEY_CHECKS = 1;

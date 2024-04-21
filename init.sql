@@ -52,7 +52,7 @@ CREATE TABLE Archer (
 
 CREATE TABLE RoundRecord (
 	ID INT PRIMARY KEY AUTO_INCREMENT,
-	`Date` DATETIME,
+	`Date` DATE,
 	RoundID INT,
 	Equipment VARCHAR(255),
 	ArcherID INT,
@@ -63,18 +63,18 @@ CREATE TABLE RoundRecord (
 
 CREATE TABLE Arrow (
 	ID INT PRIMARY KEY AUTO_INCREMENT,
+	RoundRecordID INT,
 	PertainingEnd INT,
 	Score INT,
-	RoundRecordID INT,
 	FOREIGN KEY (RoundRecordID) REFERENCES RoundRecord(ID)
 );
 
 CREATE TABLE CompetitionDetails (
 	CompetitionID INT,
+	RoundID INT,
 	AgeGroup VARCHAR(255),
 	Gender VARCHAR(255),
 	Equipment VARCHAR(255),
-	RoundID INT,
 	FOREIGN KEY (CompetitionID) REFERENCES Competition(ID),
 	FOREIGN KEY (AgeGroup, Gender) REFERENCES Class(AgeGroup, Gender),
 	FOREIGN KEY (Equipment) REFERENCES Division(Equipment),

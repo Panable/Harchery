@@ -8,4 +8,4 @@ define('DB_NAME', 'harcher');
 //App info
 define('APPROOT', dirname(dirname(__FILE__)));
 define('URLROOT', 'http://localhost/harchery/');
-define('SITENAME', 'HarchersGalore!');
+define('SITENAME', 'Harchery');

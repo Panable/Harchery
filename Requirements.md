@@ -41,7 +41,7 @@
 
 
 
-# Recorder
+## Recorder
 
 - [ ] The recorder has to be able to enter new archers, new rounds and new competitions.
 > Page for creating archers, page for creating new competitions, page for creating new rounds. Competition is the most complicated and even that's not that complicated.

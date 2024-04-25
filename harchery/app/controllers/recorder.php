@@ -11,7 +11,7 @@ class recorder extends controller
      */
     public function __construct()
     {
-        //$this->postModel = $this->model('menumodel');
+        $this->postModel = $this->model('recordermodel');
     }
 
     /*
@@ -29,9 +29,9 @@ class recorder extends controller
 
     public function newarcher()
     {
-        //$posts = $this->postModel->getMenu();
+        $clubs = $this->postModel->getClubs();
         $data = [
-            'title' => 'Welcome',
+            'clubs' => $clubs
         ];
         $this->view('recorder/create_archer', $data);
     }

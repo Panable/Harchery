@@ -6,11 +6,10 @@
         <!-- Center square -->
         <div class="square card bg-dark text-white">
             <div class="card-body text-center">
-                <h1 class="card-text">Select which Archer you are</h1>
+                <h1 class="card-text">Who are ye?</h1>
                 <form action="<?php echo URLROOT; ?>user/archer" method="post">
                     <br>
                     <div class="mb-3">
-                        <label for="club" class="form-label">Club</label>
                         <select class="form-select" id="UserID" name="UserID">
                             <?php
                             foreach ($data['users'] as $user) {

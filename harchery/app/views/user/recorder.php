@@ -6,7 +6,7 @@
         <!-- Center square -->
         <div class="square card bg-dark text-white">
             <div class="card-body text-center">
-                <h1 class="card-text">Select your Club</h1>
+                <h1 class="card-text">Select yer Club</h1>
                 <form action="<?php echo URLROOT; ?>user/recorder" method="post">
                     <br>
                     <div class="mb-3">

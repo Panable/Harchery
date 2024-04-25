@@ -30,17 +30,6 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="club" class="form-label">Club</label>
-                                    <select class="form-select" id="ClubID" name="ClubID">
-                                        <?php
-                                        foreach ($data['clubs'] as $club) {
-                                            
-                                            echo '<option value="' . $club->ID . '">' . $club->Name . ' [' . $club->State . ']</option>';
-                                            //echo "<option value=$club->ID>$club->Name</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
                                 <button type="submit" class="btn btn-primary">Add</button>
                             </form>
                         </div>

@@ -10,10 +10,11 @@ class recorder extends controller
     private function postRequestArcherCreate()
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        print_r($_POST['DOB']);
+        $archerData = $_POST;
+        $archerData['ClubID'] = getSession('UserID');
         try {
             $this->model->createRow('Archer', $_POST);
-            status_msg("success");
+            status_msg("Ye have successfully added yer archer~!");
         } catch (Exception $e) {
             status_msg("FAILED TO ADD ARCHER $e");
         }
@@ -32,10 +33,6 @@ class recorder extends controller
             return;
         }
 
-        $clubs = $this->model->readTable('Club');
-        $data = [
-            'clubs' => $clubs
-        ];
-        $this->view('recorder/create_archer', $data);
+        $this->view('recorder/create_archer');
     }
 }

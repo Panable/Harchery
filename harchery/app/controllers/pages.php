@@ -33,7 +33,7 @@ class pages extends controller
         $data = [
             'title' => 'Welcome',
         ];
-        $this->view('pages/index', $data);
+        $this->view('pages/recorder', $data);
     }
     public function archer()
     {

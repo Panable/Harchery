@@ -27,15 +27,18 @@
                                     <select class="form-select" id="gender" name="gender">
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
-                                        <option value="other">Other</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="club" class="form-label">Club</label>
                                     <select class="form-select" id="club" name="club">
-                                        <option value="club1">Club 1</option>
-                                        <option value="club2">Club 2</option>
-                                        <option value="club3">Club 3</option>
+                                        <?php
+                                        foreach ($data['clubs'] as $club) {
+                                            
+                                            echo '<option value="' . $club->ID . '">' . $club->Name . ' [' . $club->State . ']</option>';
+                                            //echo "<option value=$club->ID>$club->Name</option>";
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Add</button>

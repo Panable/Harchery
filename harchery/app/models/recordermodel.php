@@ -7,20 +7,6 @@
 class recordermodel extends model
 {
 
-    public function getClubs()
-    {
-        $this->db->query("SELECT * FROM Club");
-        return $this->db->resultSet();
-    }
-
-    // Method to retrieve menu items from the 'menu' table
-    public function getMenu()
-    {
-        // Prepare and execute a query to select all records from the 'menu' table
-        $this->db->query("SELECT * FROM menu");
-        return $this->db->resultSet();
-    }
-
     // Method to read all records from a specified table
     public function readTable($table)
     {
@@ -47,7 +33,7 @@ class recordermodel extends model
     {
         try {
             // Prepare and execute a query to select a row with the specified ID from the specified table
-            $this->db->query("SELECT * FROM $table WHERE id = :id");
+            $this->db->query("SELECT * FROM $table WHERE ID = :id");
             $this->db->bind(':id', $id);
             $this->db->execute();
 
@@ -126,7 +112,7 @@ class recordermodel extends model
 
         // Construct the SQL query
         $updateColumns = implode(', ', $updateData);
-        $sql = "UPDATE $table SET $updateColumns WHERE id = :id";
+        $sql = "UPDATE $table SET $updateColumns WHERE ID = :id";
 
         try {
             // Set the query in the database handler
@@ -158,7 +144,7 @@ class recordermodel extends model
     {
         try {
             // Prepare and execute a query to delete a row with the specified ID from the specified table
-            $this->db->query("DELETE FROM $table WHERE id = :id");
+            $this->db->query("DELETE FROM $table WHERE ID = :id");
             $this->db->bind(':id', $id);
             $this->db->execute();
 

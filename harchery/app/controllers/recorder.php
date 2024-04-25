@@ -5,19 +5,25 @@
  */
 class recorder extends controller
 {
-    /*
-     * Constructor method
-     * Initializes the model for handling menu data
-     */
+
     public function __construct()
     {
         $this->postModel = $this->model('recordermodel');
     }
 
-    /*
-     * Method to handle the index page
-     * Renders either the control panel or the welcome page based on user login status
-     */
+    private function postRequestArcherCreate()
+    {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        print_r($_POST['DOB']);
+        try {
+            $this->postModel->createRow('Archer', $_POST);
+            die("success");
+        } catch (Exception $e) {
+            die("FAILED TO ADD ARCHER $e");
+        }
+        
+    }
+
     public function index()
     {
         //$posts = $this->postModel->getMenu();
@@ -29,7 +35,12 @@ class recorder extends controller
 
     public function newarcher()
     {
-        $clubs = $this->postModel->getClubs();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->postRequestArcherCreate();
+            return;
+        }
+
+        $clubs = $this->postModel->readTable('Club');
         $data = [
             'clubs' => $clubs
         ];

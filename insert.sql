@@ -88,7 +88,16 @@ INSERT INTO `Round` (Name, `Range`, TotalEnds, Face)
 VALUES ('WA90/1440', 90, 6, 120),
        ('WA90/1440', 70, 6, 120),
        ('WA90/1440', 50, 6, 80),
-       ('WA90/1440', 30, 6, 80);
+       ('WA90/1440', 30, 6, 80),
+       ('WA70/1440', 90, 6, 120),
+       ('WA70/1440', 90, 6, 120),
+       ('WA60/1440', 90, 6, 120),
+       ('AA50/1440', 90, 6, 12),
+
+       ('Long Melbourne', 90, 6, 120),
+       ('Long Sydney', 90, 6, 120),
+       ('Long Brisbane', 90, 6,120),
+
 
 -- Insert statements for Club table
 INSERT INTO Club (Name, State)
@@ -1237,13 +1246,13 @@ VALUES ('Blanche', 'Gieves', '1972-05-01', 'Female', 89),
 -- Insert statements for RoundRecord table
 INSERT INTO RoundRecord (`Date`, RoundID, Equipment, ArcherID)
 VALUES ('2024-04-01', 1, 'Recurve', 1),
-       ('2024-04-01', 2  'Recurve', 1),
-       ('2024-04-01', 3  'Compound', 1),
-       ('2024-04-01', 4  'Recurve BareBow', 1),
-       ('2024-04-01', 5  'Compound', 1),
-       ('2024-04-01', 6  'LongBow', 1),
+       ('2024-04-01', 2, 'Recurve', 1),
+       ('2024-04-01', 3, 'Compound', 1),
+       ('2024-04-01', 4, 'Recurve BareBow', 1),
+       ('2024-04-01', 5, 'Compound', 1),
+       ('2024-04-01', 6, 'LongBow', 1),
        ('2024-04-02', 2, 'Compound', 2),
-       ('2024-04-03', 3, 'Recurve BareBow', 3);
+       ('2024-04-16', 3, 'Recurve BareBow', 3);
 
 -- Insert statements for Arrow table
 INSERT INTO Arrow (RoundRecordID, PertainingEnd, Score)
@@ -1251,7 +1260,8 @@ VALUES (1, 1, 10),
        (1, 2, 10),
        (1, 3, 10),
        (1, 4, 10),
-       (1, 5, 10);
+       (1, 5, 10),
+       (1, 6, 10);
 
 -- Insert statements for CompetitionDetails table
 INSERT INTO CompetitionDetails (CompetitionID, RoundID, AgeGroup, Gender, Equipment)
@@ -1259,6 +1269,7 @@ VALUES (1, 1, 'Open', 'Male', 'Recurve'),
        (1, 1, 'Open', 'Male', 'Compound'),
        (1, 1, 'Under 21', 'Male', 'Recurve'),
        (1, 1, 'Under 21', 'Male', 'Compound');
+
 
 -- Insert statements for CompetitionRecord table
 INSERT INTO CompetitionRecord (RoundRecordID, CompetitionID)

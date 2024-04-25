@@ -10,8 +10,10 @@ database='harcher'
 
 # SQL file
 sql_file='init.sql'
+view_sql_file='views.sql'
 insert_sql_file='insert.sql'
 
 # Execute SQL file
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${sql_file}
+docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${view_sql_file}
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${insert_sql_file}

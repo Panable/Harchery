@@ -32,7 +32,7 @@
                     </div>
                     <div class="card bg-dark text-white mb-4">
                         <div class="card-body text-center">
-                            <h3 class="card-title">Connect with Others</h3>
+                            <h3 class="card-title">Archers BEWARE</h3>
                             <p class="card-text">
                                 Join our vibrant archery community to connect with fellow enthusiasts, share tips and techniques, and engage in discussions about all things archery. Learn from others' experiences, seek advice, and build friendships that last a lifetime.
                             </p>

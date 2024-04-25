@@ -35,4 +35,12 @@ class pages extends controller
         ];
         $this->view('pages/index', $data);
     }
+    public function archer()
+    {
+        //$posts = $this->postModel->getMenu();
+        $data = [
+            'title' => 'Welcome',
+        ];
+        $this->view('pages/archer', $data);
+    }
 }

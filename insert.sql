@@ -93,10 +93,9 @@ VALUES ('WA90/1440', 90, 6, 120),
        ('WA70/1440', 90, 6, 120),
        ('WA60/1440', 90, 6, 120),
        ('AA50/1440', 90, 6, 12),
-
        ('Long Melbourne', 90, 6, 120),
        ('Long Sydney', 90, 6, 120),
-       ('Long Brisbane', 90, 6,120),
+       ('Long Brisbane', 90, 6, 120);
 
 
 -- Insert statements for Club table

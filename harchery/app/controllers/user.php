@@ -11,7 +11,7 @@ class user extends controller
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         setSession("UserID", $_POST['UserID']);
-        die("successfully set user!");
+        status_msg("successfully set user!");
     }
 
     private function postRequestSetUserType()
@@ -28,7 +28,7 @@ class user extends controller
                 redirect('user/recorder');
                 break;
             default:
-                die("failure to assign userType");
+                status_msg("failure to assign userType");
                 break;
         }
     }

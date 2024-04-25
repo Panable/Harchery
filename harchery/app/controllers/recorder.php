@@ -13,9 +13,9 @@ class recorder extends controller
         print_r($_POST['DOB']);
         try {
             $this->model->createRow('Archer', $_POST);
-            die("success");
+            status_msg("success");
         } catch (Exception $e) {
-            die("FAILED TO ADD ARCHER $e");
+            status_msg("FAILED TO ADD ARCHER $e");
         }
         
     }

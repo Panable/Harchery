@@ -28,3 +28,9 @@ function getSession($key)
 
     return $_SESSION[$key];
 }
+
+function status_msg($msg)
+{
+    setSession('statusMsg', $msg);    
+    redirect('status');
+}

@@ -1,14 +1,10 @@
 <?php
-/*
- * Pages Class
- * Extends the base Controller class, handles rendering different pages
- */
 class recorder extends controller
 {
 
     public function __construct()
     {
-        $this->postModel = $this->model('recordermodel');
+        $this->model = $this->newModel('recordermodel');
     }
 
     private function postRequestArcherCreate()
@@ -16,7 +12,7 @@ class recorder extends controller
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         print_r($_POST['DOB']);
         try {
-            $this->postModel->createRow('Archer', $_POST);
+            $this->model->createRow('Archer', $_POST);
             die("success");
         } catch (Exception $e) {
             die("FAILED TO ADD ARCHER $e");
@@ -26,21 +22,17 @@ class recorder extends controller
 
     public function index()
     {
-        //$posts = $this->postModel->getMenu();
-        $data = [
-            'title' => 'Welcome',
-        ];
-        $this->view('recorder/index', $data);
+        $this->view('recorder/index');
     }
 
-    public function newarcher()
+    public function createArcher()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->postRequestArcherCreate();
             return;
         }
 
-        $clubs = $this->postModel->readTable('Club');
+        $clubs = $this->model->readTable('Club');
         $data = [
             'clubs' => $clubs
         ];

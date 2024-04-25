@@ -9,7 +9,7 @@
                     <div class="card bg-dark text-white mb-4">
                         <div class="card-body text-center">
                             <h1 class="card-text">Add a New Archer</h1>
-                            <form action="<?php echo URLROOT; ?>recorder/newarcher" method="post">
+                            <form action="<?php echo URLROOT; ?>recorder/createArcher" method="post">
                                 <div class="mb-3">
                                     <label for="FirstName" class="form-label">First Name</label>
                                     <input type="text" class="form-control" id="FirstName" name="FirstName">

@@ -6,8 +6,15 @@
         <!-- Center square -->
         <div class="square card bg-dark text-white">
             <div class="card-body text-center">
-                <h1 class="card-text">Mr Recorder. What do ye want do?</h1>
-                <a class="link-secondary" href=<?php echo URLROOT; ?>recorder/createArcher>1. Add a new archer</a>
+                <h1 class="card-text">Select your user type</h1>
+                <form action="<?php echo URLROOT; ?>user" method="post">
+                    <br>
+                    <select class="form-select" id="UserType" name="UserType">
+                        <option value="Archer">Archer</option>
+                        <option value="Recorder">Recorder</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
         </div>
     </main>

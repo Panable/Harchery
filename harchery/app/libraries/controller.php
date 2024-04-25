@@ -6,10 +6,10 @@
 class controller
 {
     // Instance variable to hold the model object
-    protected $postModel;
+    protected $model;
 
     // Function to load a model
-    public function model($model)
+    public function newModel($model)
     {
         // Require the model file
         require_once __DIR__ . '/../models/' . $model . '.php';

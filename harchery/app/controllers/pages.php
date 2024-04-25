@@ -27,22 +27,12 @@ class pages extends controller
         $this->view('pages/index', $data);
     }
 
-    /*
-     * Method to handle the about page
-     * Renders the about us page
-     */
-    public function about()
+    public function recorder()
     {
-        $data = ['title' => 'About Us'];
-        $this->view('pages/about', $data);
-    }
-
-    /*
-     * Method to handle the status page
-     * Renders the status page
-     */
-    public function status()
-    {
-        $this->view('pages/status');
+        //$posts = $this->postModel->getMenu();
+        $data = [
+            'title' => 'Welcome',
+        ];
+        $this->view('pages/index', $data);
     }
 }

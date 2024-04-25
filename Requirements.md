@@ -14,7 +14,7 @@
 
 
 - [ ] Archers need to be able to enter their scores into a staging table using a hand-held device.
-> For now just use the tables as it (**SHOULD** change eventually)
+> For now just use the tables as is (**SHOULD** change eventually)
 
 
 - [ ] Able to record a date and time, round, equipment.

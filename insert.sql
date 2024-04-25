@@ -51,10 +51,10 @@ INSERT INTO Club (Name, State) VALUES
 ('Coast Archers', 'NSW');
 
 -- Insert statements for Archer table
-INSERT INTO Archer (FirstName, DOB, Gender, ClubID) VALUES 
-('John', '1990-05-15', 'Male', 1),
-('Emily', '2002-08-21', 'Female', 2),
-('Michael', '1998-02-10', 'Male', 3);
+INSERT INTO Archer (FirstName, LastName, DOB, Gender, ClubID) VALUES 
+('John', "Joel", '1990-05-15', 'Male', 1),
+('Emily', "Joel", '2002-08-21', 'Female', 2),
+('Michael', "Joel", '1998-02-10', 'Male', 3);
 
 -- Insert statements for RoundRecord table
 INSERT INTO RoundRecord (`Date`, RoundID, Equipment, ArcherID) VALUES 

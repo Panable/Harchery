@@ -14,5 +14,14 @@ class archer extends controller
         $this->view('archer/index', $data);
     }
 
+    public function viewScore()
+    {
+        $data = [
+            
+        ];
+        $this->view('archer/view_score', $data);
+    }
+
+
 }
 

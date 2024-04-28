@@ -5,7 +5,7 @@
     <main role="main" class="flex-grow-1 overflow-auto d-flex align-items-center justify-content-center">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="card bg-dark text-white mb-4">
                         <div class="card-body text-center">
                             <h1 class="card-text">Create a Competition</h1>
@@ -14,32 +14,10 @@
                                 <label for="Name" class="form-label">Competition Name</label>
                                 <input type="text" class="form-control" id="FirstName" name="FirstName">
                                 <br>
-                                <table class="table table-bordered table-dark">
-                                    <thead>
-                                        <tr>
-                                          <th class='yellow-cell' rowspan="2">Event</th>
-                                          <th colspan="2">Open</th>
-                                          <th colspan="2">50+</th>
-                                          <th colspan="2">60+, 70+</th>
-                                          <!-- More th elements for other categories -->
-                                        </tr>
-                                        <tr>
-                                          <!-- Sub headers for categories -->
-                                          <td>Male</td>
-                                          <td>Female</td>
-                                          <td>Male</td>
-                                          <td>Female</td>
-                                          <!-- More td elements for sub headers -->
-                                        </tr>
-                                    </thead>
-                                    <tr>
-                                      <td>WA90/1440</td>
-                                      <td class="yellow-cell">RC</td>
-                                      <td class="yellow-cell">RC</td>
-                                      <!-- More td elements for event data -->
-                                    </tr>
-                                    <!-- More rows for other events -->
-                                </table>
+                                <?php
+                                    require APPROOT . '/views/recorder/inc/competition_table_helper.php';
+                                    genTable($data);
+                                ?>
                             </form>
                         </div>
                     </div>

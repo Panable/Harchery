@@ -8,9 +8,6 @@ class pages extends controller
 
     public function index()
     {
-        $data = [
-            'title' => 'Welcome',
-        ];
-        $this->view('pages/index', $data);
+        $this->view('pages/index');
     }
 }

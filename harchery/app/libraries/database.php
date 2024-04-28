@@ -86,6 +86,18 @@ class database
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+
+    public function resultColumn()
+    {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+    }
+
+    public function resultIndexed() {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_NUM);
+    }
+
     // Method to fetch a single row as an object
     public function single()
     {

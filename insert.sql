@@ -56,10 +56,7 @@ VALUES ('Summer Tournament'),
 
 -- Insert statements for Class table
 INSERT INTO Class (AgeGroup, Gender)
-VALUES ('Adult', 'Male'),
-       ('Youth', 'Female'),
-       ('Junior', 'Male'),
-       ('Open', 'Female'),
+VALUES ('Open', 'Female'),
        ('Open', 'Male'),
        ('50+', 'Female'),
        ('50+', 'Male'),

@@ -50,6 +50,7 @@ class recorder extends controller
         $this->view('recorder/create_archer');
     }
 
+
     public function createCompetition()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -57,6 +58,12 @@ class recorder extends controller
             return;
         }
 
-        $this->view('recorder/create_competition');
+        $categories = $this->model->getCategories();
+
+        $data = [
+            'categories' => $categories,
+        ];
+
+        $this->view('recorder/create_competition', $data);
     }
 }

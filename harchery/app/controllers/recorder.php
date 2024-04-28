@@ -21,6 +21,20 @@ class recorder extends controller
         
     }
 
+    private function postRequestCompetitionCreate()
+    {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $archerData = $_POST;
+        $archerData['ClubID'] = getSession('UserID');
+        try {
+            $this->model->createRow('Archer', $_POST);
+            status_msg("Ye have successfully added yer archer~!");
+        } catch (Exception $e) {
+            status_msg("FAILED TO ADD ARCHER $e");
+        }
+        
+    }
+
     public function index()
     {
         $this->view('recorder/index');
@@ -34,5 +48,15 @@ class recorder extends controller
         }
 
         $this->view('recorder/create_archer');
+    }
+
+    public function createCompetition()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->postRequestCompetitionCreate();
+            return;
+        }
+
+        $this->view('recorder/create_competition');
     }
 }

@@ -8,6 +8,8 @@
             <div class="card-body text-center">
                 <h1 class="card-text">Mr Recorder. What do ye want do?</h1>
                 <a class="link-secondary" href=<?php echo URLROOT; ?>recorder/createArcher>1. Add a new archer</a>
+                <br>
+                <a class="link-secondary" href=<?php echo URLROOT; ?>recorder/createCompetition>2. Add a new competition</a>
             </div>
         </div>
     </main>

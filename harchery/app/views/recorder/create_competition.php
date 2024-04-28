@@ -10,7 +10,7 @@
                         <div class="card-body text-center">
                             <h1 class="card-text">Create a Competition</h1>
                             <br>
-                            <form>
+                            <form style="overflow-x:auto;" action="<?php echo URLROOT; ?>recorder/createCompetition" method="post">
                                 <label for="Name" class="form-label">Competition Name</label>
                                 <input type="text" class="form-control" id="FirstName" name="FirstName">
                                 <br>
@@ -18,6 +18,9 @@
                                     require APPROOT . '/views/recorder/inc/competition_table_helper.php';
                                     genTable($data);
                                 ?>
+
+
+                                <button type="submit" class="btn btn-primary mt-3" name="accept">Accept</button>
                             </form>
                         </div>
                     </div>

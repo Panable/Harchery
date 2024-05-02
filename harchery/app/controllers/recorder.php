@@ -30,13 +30,13 @@ class recorder extends controller
             echo "<br>";
             printf("%s\t", $key);
         }
-        // foreach ($recs as $record) {
-        //     
-        //     foreach ($record as $atomic) {
-        //         print_r($atomic);
-        //     }
-        // }
-        // //print_r($recs);
+        foreach ($recs as $record) {
+            
+            foreach ($record as $atomic) {
+                print_r($atomic);
+            }
+        }
+        //print_r($recs);
     }
 
     public function index()

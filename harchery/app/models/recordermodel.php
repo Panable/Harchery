@@ -14,7 +14,6 @@ class recordermodel extends model
 
 
     // [Categories] -> ['Name'], '[Gender'] => ['Male, 'Female']
-
     
     function getCategories() {
         try {
@@ -34,4 +33,5 @@ class recordermodel extends model
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
+
 }

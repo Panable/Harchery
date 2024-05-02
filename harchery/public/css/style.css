@@ -159,6 +159,10 @@ thead>tr>td {
     background-color: #884A2F !important;
 }
 
+option, select {
+    font-size: 1.0rem !important;
+}
+
 .yellow-cell {
     background-color: #FFFF00;
 }

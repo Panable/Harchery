@@ -5,6 +5,17 @@ function genTableHead($data) {
     $categories = $data['categories'];
     $header_cell="";
     $sub_header_cells="";
+    $data_layout = [
+        'categories' => [
+            [ 'Gender', 'AgeGroup' ],
+            [ 'Gender', 'AgeGroup' ],
+            [ 'Gender', 'AgeGroup' ],
+            [ 'Gender', 'AgeGroup' ],
+        ],
+        'html' => '',
+    ];
+
+    print_r($data_layout);
 
     foreach ($categories as $category) {
         $num_genders = sizeof($category->Genders);
@@ -31,7 +42,7 @@ function genTableRows($data) {
     $rows = '<tr>
               <td>WA90/1440</td>
               <td class="yellow-cell">
-                <select class="custom-select mt-2" multiple name="records[0][WA90/1440,50+,Female][]">
+                <select class="form-select mt-2" size="2" multiple name="records[0][WA90/1440,50+,Female][]">
                     <option value="C">Compound</option>
                     <option value="CB">Compound Barebow</option>
                     <option value="L">Longbow</option>
@@ -40,7 +51,7 @@ function genTableRows($data) {
                 </select>
               </td>
               <td class="yellow-cell">
-                <select class="custom-select mt-2" multiple name="records[0][WA90/1440,50+,Male][]">
+                <select class="form-select mt-2" size="2" multiple name="records[0][WA90/1440,50+,Male][]">
                     <option value="Compound">Compound</option>
                     <option value="Compound Barebow">Compound Barebow</option>
                     <option value="Longbow">Longbow</option>

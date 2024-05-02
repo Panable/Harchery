@@ -21,6 +21,13 @@ class archer extends controller
         ];
         $this->view('archer/view_score', $data);
     }
+    public function viewCompetitionResults()
+    {
+        $data = [
+            
+        ];
+        $this->view('archer/view_competition_results', $data);
+    }
 
 
 }

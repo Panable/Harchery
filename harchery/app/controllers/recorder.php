@@ -25,18 +25,18 @@ class recorder extends controller
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $recs = $_POST['records'];
+        //print_r($recs);
         foreach ($recs[0] as $key => $value) {
             echo "<br>";
+            printf("Category -> [%s] ", $key);
             echo "<br>";
-            printf("%s\t", $key);
-        }
-        foreach ($recs as $record) {
-            
-            foreach ($record as $atomic) {
-                print_r($atomic);
+            printf("Equipment -> ", $key);
+            echo "<br>";
+            foreach($value as $val) {
+                printf("____%s", $val);
+                echo "<br>";
             }
         }
-        //print_r($recs);
     }
 
     public function index()

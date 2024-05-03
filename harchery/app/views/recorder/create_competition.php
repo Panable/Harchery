@@ -6,7 +6,11 @@
             <br>
             <form action="<?php echo URLROOT; ?>recorder/createCompetition" method="post">
                 <label for="CompetitionName" class="form-label text-left"> Competition Name</label>
-                <input type="text" class="form-control mb-5" id="CompetitionName" name="CompetitionName" required maxlength="255">
+                <span>
+                    <input type="text" class="form-control mb-5" id="CompetitionName" name="CompetitionName" required maxlength="255">
+                    <label for="ClubCompetition">Club Competition?</label>
+                    <input type="checkbox" name="ClubCompetition" id="ClubCompetition" value="checked"/>
+                </span>
                 <?php
                     require APPROOT . '/views/recorder/inc/competition_table_helper.php';
                     genTable($data);

@@ -93,7 +93,21 @@ class recordermodel extends model
                 }
             }
         }
-        
+        return $competitionID;
+    }
+
+    function createChampionship($data)
+    {
+        try {
+            $this->disableForeignKeyChecks();
+            $competitionID = $this->createCompetition($data);
+            $clubID = $data['ClubID'];
+            $this->createRow('Championship', ['ClubID' => $clubID, 'CompetitionID' => $competitionID]);
+            $this->enableForeignKeyChecks();
+        } catch (PDOException $e) {
+            $this->enableForeignKeyChecks();
+            throw new Exception("Database error: " . $e->getMessage());
+        }
     }
 
     function roundNameToID($name)

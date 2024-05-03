@@ -61,6 +61,26 @@ class model
         }
     }
 
+    public function disableForeignKeyChecks()
+    {
+        try {
+            $sql = "SET foreign_key_checks = 0";
+            $this->db->query($sql);
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    public function enableForeignKeyChecks()
+    {
+        try {
+            $sql = "SET foreign_key_checks = 1";
+            $this->db->query($sql);
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
     // Method to get the column names of a specified table
     public function getColumnNames($table)
     {

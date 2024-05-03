@@ -10,6 +10,8 @@
                 <a class="link-secondary" href=<?php echo URLROOT; ?>recorder/createArcher>1. Add a new archer</a>
                 <br>
                 <a class="link-secondary" href=<?php echo URLROOT; ?>recorder/createCompetition>2. Add a new competition</a>
+                <br>
+                <a class="link-secondary" href=<?php echo URLROOT; ?>recorder/createRound>3. Add a new round</a>
             </div>
         </div>
     </main>

@@ -7,6 +7,21 @@ class recorder extends controller
         $this->model = $this->newModel('recordermodel');
     }
 
+    private function postRequestRoundCreate()
+    {
+        return;
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $archerData = $_POST;
+        $archerData['ClubID'] = getSession('UserID');
+        try {
+            $this->model->createRow('Archer', $_POST);
+            status_msg("Ye have successfully added yer archer~!");
+        } catch (Exception $e) {
+            status_msg("FAILED TO ADD ARCHER $e");
+        }
+        
+    }
+
     private function postRequestArcherCreate()
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -28,6 +43,7 @@ class recorder extends controller
             return;
         }
 
+
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $recs = $_POST['records'];
 
@@ -36,7 +52,10 @@ class recorder extends controller
         $data = [
             'CompetitionDetails' => [],
             'CompetitionName' => $name,
+            'ClubID' => '',
         ];
+        $is_club_competition = isset($_POST['ClubCompetition']); 
+        $data['ClubID'] = getSession('UserID');
 
         foreach ($recs[0] as $key => $value) {
             $pieces = explode(",", $key);
@@ -56,7 +75,10 @@ class recorder extends controller
         }
 
         try {
-            $this->model->createCompetition($data);
+            if ($is_club_competition)
+                $this->model->createChampionship($data);
+            else
+                $this->model->createCompetition($data);
             status_msg("Ye have successfully created ye competition~!");
         } catch (Exception $e) {
             status_msg("FAILED TO CREATE COMPETITION $e");
@@ -77,6 +99,16 @@ class recorder extends controller
         }
 
         $this->view('recorder/create_archer');
+    }
+
+    public function createRound()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->postRequestRoundCreate();
+            return;
+        }
+
+        $this->view('recorder/create_round');
     }
 
 

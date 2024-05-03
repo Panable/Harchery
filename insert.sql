@@ -2,6 +2,25 @@ SET
 FOREIGN_KEY_CHECKS = 0;
 
 -- Insert statements for Competition table
+INSERT INTO Class (AgeGroup, Gender)
+VALUES ('Open', 'Female'),
+       ('Open', 'Male'),
+       ('50+', 'Female'),
+       ('50+', 'Male'),
+       ('60+', 'Female'),
+       ('60+', 'Male'),
+       ('70+', 'Female'),
+       ('70+', 'Male'),
+       ('Under 21', 'Female'),
+       ('Under 21', 'Male'),
+       ('Under 18', 'Male'),
+       ('Under 18', 'Female'),
+       ('Under 16', 'Female'),
+       ('Under 16', 'Male'),
+       ('Under 14', 'Female'),
+       ('Under 14', 'Male');
+
+-- Insert statements for Class table
 INSERT INTO Competition (Name)
 VALUES ('Summer Tournament'),
        ('Winter Classic'),
@@ -103,24 +122,6 @@ VALUES ('Summer Tournament'),
        ('Arrowhead Arena Ascension'),
        ('Quiver Clash Colosseum Cup'),
        ('Golden Target Grand Challenge');
-
--- Insert statements for Class table
-INSERT INTO Class (AgeGroup, Gender)
-VALUES ('Open', 'Female'),
-       ('Open', 'Male'),
-       ('50+', 'Female'),
-       ('50+', 'Male'),
-       ('60+', 'Female'),
-       ('60+', 'Male'),
-       ('70+', 'Female'),
-       ('70+', 'Male'),
-       ('Under 21', 'Female'),
-       ('Under 21', 'Male'),
-       ('Under 18', 'Male'),
-       ('Under 16', 'Female'),
-       ('Under 16', 'Male'),
-       ('Under 14', 'Female'),
-       ('Under 14', 'Male');
 
 -- Insert statements for Division table
 INSERT INTO Division (Equipment)

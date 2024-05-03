@@ -68,7 +68,7 @@ function genTableRows($data, $categories) {
 
         foreach($categories as $category) {
             $full_rows .= "<td class=\"p-2\">\n";
-            $full_rows .= "<select class=\"form-select custom-select-lg px-3\" style=\"max-width: 10em; height: 100px;\" size=\"2\" multiple name=\"records[0][{$round},{$category['AgeGroup']},{$category['Gender']}][]\">\n";
+            $full_rows .= "<select class=\"form-select custom-select-lg\" style=\"max-width: 12em; height: 120px; overflow-y: auto; \" size=\"2\" multiple name=\"records[0][{$round},{$category['AgeGroup']},{$category['Gender']}][]\">\n";
             $full_rows .= $equipment_html;
             $full_rows .= "</select>\n";
             $full_rows .= "</td>\n";

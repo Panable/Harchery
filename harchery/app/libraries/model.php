@@ -83,7 +83,7 @@ class model
     public function createRow($table, $data)
     {
         // Remove 'id' from the data since it's auto-increment
-        unset($data['id']);
+        //unset($data['id']);
 
         // Generate placeholders for the columns and values
         $columns = implode(', ', array_keys($data));

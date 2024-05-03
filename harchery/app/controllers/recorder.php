@@ -25,32 +25,37 @@ class recorder extends controller
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $recs = $_POST['records'];
-        print_r($recs);
+        $name = $_POST['CompetitionName'];
 
-        echo "<br>";
-        echo "<br>";
+        $data = [
+            'CompetitionDetails' => [],
+            'CompetitionName' => $name,
+        ];
+
         foreach ($recs[0] as $key => $value) {
-            echo "<br>";
             $pieces = explode(",", $key);
 
             $round_name = $pieces[0];
             $age_group = $pieces[1];
             $gender = $pieces[2];
-            printf("round -> %s ", $round_name);
-            echo "<br>";
-            printf("age group -> %s ", $age_group);
-            echo "<br>";
-            printf("gender -> %s ", $gender);
-
-            echo "<br>";
-
-            printf("Equipment -> ", $key);
-            echo "<br>";
             foreach($value as $val) {
-                printf("____%s", $val);
-                echo "<br>";
+                $atomic_detail = [
+                    'RoundName' => $round_name,
+                    'AgeGroup' => $age_group,
+                    'Gender' => $gender,
+                    'Equipment' => $val,
+                ];
+                array_push($data['CompetitionDetails'], $atomic_detail);
             }
         }
+
+        try {
+            $this->model->createCompetition($data);
+            status_msg("Ye have successfully created ye competition~!");
+        } catch (Exception $e) {
+            status_msg("FAILED TO CREATE COMPETITION $e");
+        }
+
     }
 
     public function index()

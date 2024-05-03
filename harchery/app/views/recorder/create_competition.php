@@ -11,8 +11,8 @@
                             <h1 class="card-text">Create a Competition</h1>
                             <br>
                             <form style="overflow-x:auto;" action="<?php echo URLROOT; ?>recorder/createCompetition" method="post">
-                                <label for="Name" class="form-label">Competition Name</label>
-                                <input type="text" class="form-control" id="FirstName" name="FirstName">
+                                <label for="CompetitionName" class="form-label">Competition Name</label>
+                                <input type="text" class="form-control" id="CompetitionName" name="CompetitionName">
                                 <br>
                                 <?php
                                     require APPROOT . '/views/recorder/inc/competition_table_helper.php';

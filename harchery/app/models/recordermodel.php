@@ -58,4 +58,55 @@ class recordermodel extends model
         }
     }
 
+    function createCompetition($data) {
+
+        // Create Competition Table Record.
+        $competitionName = $data['CompetitionName'];
+        try {
+            $this->createRow('Competition', ['Name' => $competitionName]);
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+
+        // Get Competition ID
+        $competitionID = $this->db->getLastInsertID();
+        
+        // Create Competition Details.
+        foreach($data['CompetitionDetails'] as $details) {
+            $roundIDs = $this->roundNameToID($details['RoundName']);
+            $ageGroup = $details['AgeGroup'];
+            $gender = $details['Gender'];
+            $equipment = $details['Equipment'];
+
+            foreach ($roundIDs as $roundID) {
+                $competitionDetails = [
+                    'CompetitionID' => $competitionID,
+                    'RoundID' => $roundID,
+                    'AgeGroup' => $ageGroup,
+                    'Gender' => $gender,
+                    'Equipment' => $equipment,
+                ];
+                try {
+                    $this->createRow('CompetitionDetails', $competitionDetails);
+                } catch (PDOException $e) {
+                    throw new Exception("Database error: " . $e->getMessage());
+                }
+            }
+        }
+        
+    }
+
+    function roundNameToID($name)
+    {
+        $sql = "SELECT ID FROM Round WHERE Name = :name";
+
+        try {
+            $this->db->query($sql);
+            $this->db->bind(':name', $name);
+            return $data = $this->db->resultColumn();
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
 }

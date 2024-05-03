@@ -2,7 +2,7 @@
 
 <div class="d-flex flex-column overflow-hidden min-vh-100 vh-100">
     <?php require APPROOT . '/views/inc/navbar.php'; ?>
-    <main role="main" class="flex-grow-1 overflow-auto d-flex align-items-center justify-content-center">
+    <main role="main" class="flex-grow-0 overflow-auto">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12">
@@ -18,7 +18,6 @@
                                     require APPROOT . '/views/recorder/inc/competition_table_helper.php';
                                     genTable($data);
                                 ?>
-
                                 <button type="submit" class="btn btn-primary mt-3" name="accept">Accept</button>
                             </form>
                         </div>

@@ -61,45 +61,6 @@ function genTableRows($data, $categories) {
         $full_rows .= "</tr>";
     }
 
-    
-
-    $rows = '<tr>
-              <td>WA90/1440</td>
-              <td class="yellow-cell">
-                <select class="form-select mt-2" size="2" multiple name="records[0][WA90/1440,50+,Female][]">'
-                . $equipment_html .
-                '</select>
-              </td>
-              <td class="yellow-cell">
-                <select class="form-select mt-2" size="2" multiple name="records[0][WA90/1440,50+,Male][]">'
-                . $equipment_html .
-                '</select>
-              </td>
-              <!-- More td elements for event data -->
-            </tr>';
-
-    $rows1 = '<tr>
-              <td>WA90/1440</td>
-              <td class="yellow-cell">
-                <select class="form-select mt-2" size="2" multiple name="records[0][WA90/1440,50+,Female][]">
-                    <option value="C">Compound</option>
-                    <option value="CB">Compound Barebow</option>
-                    <option value="L">Longbow</option>
-                    <option value="R">Recurve</option>
-                    <option value="RB">Recurve Barebow</option>
-                </select>
-              </td>
-              <td class="yellow-cell">
-                <select class="form-select mt-2" size="2" multiple name="records[0][WA90/1440,50+,Male][]">
-                    <option value="Compound">Compound</option>
-                    <option value="Compound Barebow">Compound Barebow</option>
-                    <option value="Longbow">Longbow</option>
-                    <option value="Recurve">Recurve</option>
-                    <option value="Recurve Barebow">Recurve Barebow</option>
-                </select>
-              </td>
-              <!-- More td elements for event data -->
-            </tr>';
     return $full_rows;
 }
 

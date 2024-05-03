@@ -27,12 +27,23 @@ class recorder extends controller
         $recs = $_POST['records'];
         print_r($recs);
 
-            echo "<br>";
-            echo "<br>";
+        echo "<br>";
+        echo "<br>";
         foreach ($recs[0] as $key => $value) {
             echo "<br>";
-            printf("Category -> [%s] ", $key);
+            $pieces = explode(",", $key);
+
+            $round_name = $pieces[0];
+            $age_group = $pieces[1];
+            $gender = $pieces[2];
+            printf("round -> %s ", $round_name);
             echo "<br>";
+            printf("age group -> %s ", $age_group);
+            echo "<br>";
+            printf("gender -> %s ", $gender);
+
+            echo "<br>";
+
             printf("Equipment -> ", $key);
             echo "<br>";
             foreach($value as $val) {

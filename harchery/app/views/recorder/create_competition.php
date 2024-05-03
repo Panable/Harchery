@@ -6,10 +6,10 @@
             <br>
             <form action="<?php echo URLROOT; ?>recorder/createCompetition" method="post">
                 <label for="CompetitionName" class="form-label text-left"> Competition Name</label>
-                <input type="text" class="form-control mb-5" id="CompetitionName" name="CompetitionName">
+                <input type="text" class="form-control mb-5" id="CompetitionName" name="CompetitionName" required maxlength="255">
                 <?php
-                require APPROOT . '/views/recorder/inc/competition_table_helper.php';
-                genTable($data);
+                    require APPROOT . '/views/recorder/inc/competition_table_helper.php';
+                    genTable($data);
                 ?>
                 <button type="submit" class="btn btn-primary mt-3" name="accept">Accept</button>
             </form>

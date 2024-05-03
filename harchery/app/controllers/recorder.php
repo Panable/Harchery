@@ -23,8 +23,14 @@ class recorder extends controller
 
     private function postRequestCompetitionCreate()
     {
+        if (!isset($_POST['records']) || in_array('', $_POST['records'], true)) {
+            status_msg("YOU DIDN'T SELECT A RECORD!");
+            return;
+        }
+
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $recs = $_POST['records'];
+
         $name = $_POST['CompetitionName'];
 
         $data = [

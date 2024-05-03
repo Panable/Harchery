@@ -23,7 +23,7 @@ function genTableHead($data) {
     }
     $head = '<thead>
                  <tr>
-                   <th class="yellow-cell" rowspan="2">Event</th>'
+                   <th rowspan="2">Event</th>'
                  . $header_cell .
                  '</tr>
                  <tr>'
@@ -36,23 +36,25 @@ function genTableHead($data) {
     return $data_layout;
 }
 
+
+
 function genTableRows($data, $categories) {
-    
+
     $full_rows = '';
-    $equipment_html = '';     
+    $equipment_html = '';
 
     foreach($data['equipment'] as $equipment) {
-        $equipment_html .= "<option value =\"{$equipment}\">{$equipment}</option>\n";
+        $equipment_html .= "<option value=\"{$equipment}\">{$equipment}</option>\n";
     }
 
-    
+
     foreach($data['rounds'] as $round) {
         $full_rows .= "<tr>\n";
         $full_rows .= "<td>{$round}</td>\n";
 
         foreach($categories as $category) {
-            $full_rows .= "<td class=\"yellow-cell\">\n";
-            $full_rows .= "<select class=\"form-select mt-2\" size=\"2\" multiple name=\"records[0][{$round},{$category['AgeGroup']},{$category['Gender']}][]\">\n";
+            $full_rows .= "<td class=\"p-2\">\n";
+            $full_rows .= "<select class=\"form-select custom-select-lg px-3\" style=\"max-width: 10em; height: 100px;\" size=\"2\" multiple name=\"records[0][{$round},{$category['AgeGroup']},{$category['Gender']}][]\">\n";
             $full_rows .= $equipment_html;
             $full_rows .= "</select>\n";
             $full_rows .= "</td>\n";
@@ -63,6 +65,7 @@ function genTableRows($data, $categories) {
 
     return $full_rows;
 }
+
 
 function genTable($data) {
     $html = '<table class="table table-bordered table-dark">';

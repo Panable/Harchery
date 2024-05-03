@@ -5,8 +5,8 @@
             <h1 class="card-text">Create a Competition</h1>
             <br>
             <form action="<?php echo URLROOT; ?>recorder/createCompetition" method="post">
-                <label for="Name" class="form-label text-left"> Competition Name</label>
-                <input type="text" class="form-control mb-5" id="FirstName" name="FirstName">
+                <label for="CompetitionName" class="form-label text-left"> Competition Name</label>
+                <input type="text" class="form-control mb-5" id="CompetitionName" name="CompetitionName">
                 <?php
                 require APPROOT . '/views/recorder/inc/competition_table_helper.php';
                 genTable($data);

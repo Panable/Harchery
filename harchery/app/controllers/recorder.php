@@ -61,11 +61,15 @@ class recorder extends controller
             $this->postRequestCompetitionCreate();
             return;
         }
-
+        
+        $equipment = $this->model->getEquipment();
+        $rounds = $this->model->getRounds();
         $categories = $this->model->getCategories();
 
         $data = [
             'categories' => $categories,
+            'equipment' => $equipment,
+            'rounds' => $rounds,
         ];
 
         $this->view('recorder/create_competition', $data);

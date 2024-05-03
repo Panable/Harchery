@@ -15,6 +15,18 @@ class recordermodel extends model
 
     // [Categories] -> ['Name'], '[Gender'] => ['Male, 'Female']
     
+    function getEquipment() {
+        try {
+            $equipment_sql = "SELECT Equipment From Division;";
+
+            $this->db->query($equipment_sql);
+            $data = $this->db->resultColumn();
+            return $data;
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+    
     function getCategories() {
         try {
             $age_group_sql = "SELECT AgeGroup From Class GROUP BY AgeGroup;";
@@ -29,6 +41,18 @@ class recordermodel extends model
             }
             return $data;
 
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    function getRounds() {
+        try {
+            $rounds_sql = "SELECT Name From Round Group By Name";
+
+            $this->db->query($rounds_sql);
+            $data = $this->db->resultColumn();
+            return $data;
         } catch (PDOException $e) {
             throw new Exception("Database error: " . $e->getMessage());
         }

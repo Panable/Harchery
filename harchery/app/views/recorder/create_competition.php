@@ -7,7 +7,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="card bg-dark text-white mb-4">
-                        <div class="card-body text-center">
+                        <div class="card-body text-center overflow">
                             <h1 class="card-text">Create a Competition</h1>
                             <br>
                             <form style="overflow-x:auto;" action="<?php echo URLROOT; ?>recorder/createCompetition" method="post">

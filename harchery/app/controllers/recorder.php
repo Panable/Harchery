@@ -25,7 +25,10 @@ class recorder extends controller
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $recs = $_POST['records'];
-        //print_r($recs);
+        print_r($recs);
+
+            echo "<br>";
+            echo "<br>";
         foreach ($recs[0] as $key => $value) {
             echo "<br>";
             printf("Category -> [%s] ", $key);

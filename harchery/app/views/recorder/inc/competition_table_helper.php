@@ -36,7 +36,20 @@ function genTableHead($data) {
     return $data_layout;
 }
 
-
+function abbreviateString($string) {
+    $abbreviation = '';
+    
+    // Iterate through each character in the string
+    for ($i = 0; $i < strlen($string); $i++) {
+        // Check if the character is a capitalized letter
+        if (ctype_upper($string[$i])) {
+            // Append the capitalized letter to the abbreviation
+            $abbreviation .= $string[$i];
+        }
+    }
+    
+    return $abbreviation;
+}
 
 function genTableRows($data, $categories) {
 
@@ -44,7 +57,8 @@ function genTableRows($data, $categories) {
     $equipment_html = '';
 
     foreach($data['equipment'] as $equipment) {
-        $equipment_html .= "<option value=\"{$equipment}\">{$equipment}</option>\n";
+        $abv = abbreviateString($equipment);
+        $equipment_html .= "<option value=\"{$equipment}\">{$abv}</option>\n";
     }
 
 

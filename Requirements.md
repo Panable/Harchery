@@ -20,7 +20,7 @@
 - [ ] Able to record a date and time, round, equipment.
 > Just create a round record, with arrows
 
-- [ ] Archers have to be able to look up definitions of rounds, i.e. what ranges make up the round.
+- [x] Archers have to be able to look up definitions of rounds, i.e. what ranges make up the round.
 > List all 'round' 
 
 - [ ] Archers want to look up club competition results and see how everyone has placed and who shot what score.

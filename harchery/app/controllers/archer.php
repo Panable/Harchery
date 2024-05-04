@@ -23,9 +23,14 @@ class archer extends controller
         $this->view('archer/view_score', $data);
     }
 
-    public function viewRounds() {
+    public function viewRounds() 
+    {
+        $rounds = $this->model->getRounds();
+        $data = [
+            'Rounds' => $rounds,
+        ];
 
-        $this->view('archer/view_rounds');
+        $this->view('archer/view_rounds', $data);
     }
 
     public function viewCompetitionResults()

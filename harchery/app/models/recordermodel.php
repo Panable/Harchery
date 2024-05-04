@@ -110,6 +110,30 @@ class recordermodel extends model
         }
     }
 
+    function createRound($data) {
+        $roundName = $data['RoundName'];
+        foreach ($data['distances'] as $round) {
+            $distance = $round['distance'];
+            $totalEnds = $round['ends'];
+            $face = $round['face'];
+
+            try {
+                $sqltest = "INSERT INTO `Round` (Name, `Range`, TotalEnds, Face) VALUES (:Name, :`Range`, :TotalEnds, :Face)";
+
+                $this->createRow(
+                "`Round`", [
+                    'Name' => $roundName, 
+                    "`Range`" => $distance, 
+                    'TotalEnds' => $totalEnds, 
+                    'Face' => $face,
+                ]);
+            } catch (PDOException $e) {
+                throw new Exception("Database error: " . e->getMessage());
+            }
+
+        }
+    }
+
     function roundNameToID($name)
     {
         $sql = "SELECT ID FROM Round WHERE Name = :name";

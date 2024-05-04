@@ -108,6 +108,7 @@ class model
         // Generate placeholders for the columns and values
         $columns = implode(', ', array_keys($data));
         $placeholders = ':' . implode(', :', array_keys($data));
+        $placeholders = str_replace('`', '', $placeholders);
 
         // Construct the SQL query for insertion
         $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
@@ -117,7 +118,8 @@ class model
             $this->db->query($sql);
 
             // Bind the data values to the placeholders
-            foreach ($data as $column => $value) {
+            foreach ($data as $column => &$value) {
+                $column = str_replace('`', '', $column);
                 $this->db->bind(":$column", $value);
             }
 

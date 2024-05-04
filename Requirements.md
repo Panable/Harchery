@@ -43,7 +43,7 @@
 
 ## Recorder
 
-- [ ] The recorder has to be able to enter new archers, new rounds and new competitions.
+- [x] The recorder has to be able to enter new archers, new rounds and new competitions.
 > Page for creating archers, page for creating new competitions, page for creating new rounds. Competition is the most complicated and even that's not that complicated.
 
 
@@ -51,21 +51,21 @@
 > Again with the staging, eventually we should have a separate table for staging, but for now allow them to edit archer scores or something
 
 
-- [ ] Each arrow score has to be able to be identified in terms of whichend it belongs to.
+- [x] Each arrow score has to be able to be identified in terms of whichend it belongs to.
 > Database requirement, already done. We can have a page going indepth into the arrows ig?
 
 
-- [ ] Each end has to be identified as to its position in the round score
+- [x] Each end has to be identified as to its position in the round score
 > **Not entirely sure what this means**
 
-- [ ] Some of the scores have to be able to be linked to a competition. Some competitions have to be able to be identified as part of a club championship.
+- [x] Some of the scores have to be able to be linked to a competition. Some competitions have to be able to be identified as part of a club championship.
 > Done in database.
 
-- [ ] The database has to have all the information needed to identify the archer’s division
+- [x] The database has to have all the information needed to identify the archer’s division
 > Already done, store age, gender, etc.
 
 - [ ] There should be a definition of the default equipment, so that the category can be identified in the absence of user input
 > Done in frontend
 
-- [ ] The equivalent rounds have to be time-dependent,This would make past competitions invalid, so there needs to be a history.
+- [x] The equivalent rounds have to be time-dependent,This would make past competitions invalid, so there needs to be a history.
 > Time is being stored in the round records

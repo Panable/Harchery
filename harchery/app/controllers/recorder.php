@@ -11,8 +11,15 @@ class recorder extends controller
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $data = $_POST;
-        print_r($data);
+
+        // Remove empty elems from data
+        foreach ($data['distances'] as $key => $round) {
+            if (empty($round['ends']) | empty($round['face']))
+                unset($data['distances'][$key]);
+        }
+
         try {
+            $this->model->createRound($data);
             status_msg("Ye have successfully added yer round there bud~!");
         } catch (Exception $e) {
             status_msg("FAILED TO ADD ROUND $e");

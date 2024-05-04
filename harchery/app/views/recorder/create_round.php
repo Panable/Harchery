@@ -16,15 +16,15 @@
                     $html .= "<fieldset id={$distance}>
                                 <legend>Distance {$distance}:</legend>
                                 <div class=\"mb-3\">
-                                    <label for=\"distance{$i}\">Distance {$distance}:</label>
                                     <input type=\"hidden\" id=\"distance{$i}\" name=\"distances[{$i}][distance]\" value=\"{$distance}\">
+                                    <label for=\"distances[{$i}][ends]\">Ends:</label>
                                     <select name=\"distances[{$i}][ends]\" onchange=\"handleEndsChange(this, {$i})\">
                                         <option value=\"\">None</option>
                                         <option value=\"5\">5 Ends</option>
                                         <option value=\"6\">6 Ends</option>
                                     </select>
                                     <label for=\"face{$i}\">Face:</label>
-                                    <select name=\"distances[{$i}][face]\" id=\"face{$i}\">
+                                    <select name=\"distances[{$i}][face]\" id=\"face{$i}\" disabled>
                                         <option value=\"\">None</option>
                                         <option value=\"120\">120</option>
                                         <option value=\"80\">80</option>
@@ -38,11 +38,16 @@
             </form>
             <script>
                 function handleEndsChange(select, index) {
+                    console.log("Hello" + select + " " + index);
                     var faceSelect = document.getElementById('face' + index);
-                    if (select.value == 'None') {
+                    if (select.value == '') {
                         faceSelect.disabled = true;
+                        faceSelect.selectedIndex = 0;
+                        faceSelect.options[0].disabled = false;
                     } else {
+                        faceSelect.selectedIndex = 1;
                         faceSelect.disabled = false;
+                        faceSelect.options[0].disabled = true;
                     }
                 }
             </script>

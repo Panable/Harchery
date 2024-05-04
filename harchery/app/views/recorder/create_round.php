@@ -1,44 +1,53 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
-<div class="d-flex flex-column overflow-hidden min-vh-100 vh-100">
-    <?php require APPROOT . '/views/inc/navbar.php'; ?>
-    <main role="main" class="flex-grow-1 overflow-auto d-flex align-items-center justify-content-center">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card bg-dark text-white mb-4">
-                        <div class="card-body text-center">
-                            <h1 class="card-text">Add a New Archer</h1>
-                            <form action="<?php echo URLROOT; ?>recorder/createArcher" method="post">
-                                <div class="mb-3">
-                                    <label for="FirstName" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="FirstName" name="FirstName">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="LastName" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="LastName" name="LastName">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="DOB" class="form-label">Date of Birth</label>
-                                    <input type="date" class="form-control" id="DOB" name="DOB">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="Gender" class="form-label">Gender</label>
-                                    <select class="form-select" id="Gender" name="Gender">
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+<main role="main" class="container-fluid d-flex justify-content-center align-items-center">
+    <div class="card bg-dark text-white" style="width: 35vw; padding: 1em;">
+        <div class="card-body text-center">
+            <h1 class="card-text">Create a new round!</h1>
+            <form action="<?php echo URLROOT; ?>recorder/createRound" method="post">
+                <div class="mb-3">
+                    <label for="RoundName">Round Name:</label>
+                    <input type="text" class="form-control mb-5" id="RoundName" name="RoundName" required maxlength="255">
+                </div>
+                <?php
+                $html = '';
+                for ($i = 1; $i <= 9; $i++) {
+                    $distance = $i * 10;
+                    $html .= "<fieldset id={$distance}>
+                                <legend>Distance {$distance}:</legend>
+                                <div class=\"mb-3\">
+                                    <label for=\"distance{$i}\">Distance {$distance}:</label>
+                                    <input type=\"hidden\" id=\"distance{$i}\" name=\"distances[{$i}][distance]\" value=\"{$distance}\">
+                                    <select name=\"distances[{$i}][ends]\" onchange=\"handleEndsChange(this, {$i})\">
+                                        <option value=\"\">None</option>
+                                        <option value=\"5\">5 Ends</option>
+                                        <option value=\"6\">6 Ends</option>
+                                    </select>
+                                    <label for=\"face{$i}\">Face:</label>
+                                    <select name=\"distances[{$i}][face]\" id=\"face{$i}\">
+                                        <option value=\"\">None</option>
+                                        <option value=\"120\">120</option>
+                                        <option value=\"80\">80</option>
                                     </select>
                                 </div>
-                                <div class="mb-3">
-                                <button type="submit" class="btn btn-primary">Add</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            </fieldset>";
+                }
+                echo $html;
+                ?>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+            <script>
+                function handleEndsChange(select, index) {
+                    var faceSelect = document.getElementById('face' + index);
+                    if (select.value == 'None') {
+                        faceSelect.disabled = true;
+                    } else {
+                        faceSelect.disabled = false;
+                    }
+                }
+            </script>
         </div>
-    </main>
-    <?php require APPROOT . '/views/inc/footer.php'; ?>
-</div>
+    </div>
+</main>
 
-<?php require APPROOT . '/views/inc/ender.php'; ?>
+<?php require APPROOT . '/views/inc/footer.php'; ?>

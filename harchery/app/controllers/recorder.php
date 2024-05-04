@@ -9,15 +9,13 @@ class recorder extends controller
 
     private function postRequestRoundCreate()
     {
-        return;
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $archerData = $_POST;
-        $archerData['ClubID'] = getSession('UserID');
+        $data = $_POST;
+        print_r($data);
         try {
-            $this->model->createRow('Archer', $_POST);
-            status_msg("Ye have successfully added yer archer~!");
+            status_msg("Ye have successfully added yer round there bud~!");
         } catch (Exception $e) {
-            status_msg("FAILED TO ADD ARCHER $e");
+            status_msg("FAILED TO ADD ROUND $e");
         }
         
     }

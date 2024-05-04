@@ -3,7 +3,7 @@ class archer extends controller
 {
     public function __construct()
     {
-        //$this->postModel = $this->model('menumodel');
+        $this->model = $this->newModel('archermodel');
     }
 
     public function index()
@@ -19,8 +19,15 @@ class archer extends controller
         $data = [
             
         ];
+
         $this->view('archer/view_score', $data);
     }
+
+    public function viewRounds() {
+
+        $this->view('archer/view_rounds');
+    }
+
     public function viewCompetitionResults()
     {
         $data = [
@@ -28,7 +35,6 @@ class archer extends controller
         ];
         $this->view('archer/view_competition_results', $data);
     }
-
 
 }
 

@@ -8,7 +8,8 @@
             <div class="card-body text-center">
                 <h1 class="card-text">Mr Archer. What do ye want do?</h1>
                 <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewScore>1. View archer's score</a><br>
-                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewCompetitionResults>2. View competition result </a>
+                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewCompetitionResults>2. View competition result</a><br>
+                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewRounds>3. View round definitions</a><br>
                 
             </div>
         </div>

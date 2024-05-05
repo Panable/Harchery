@@ -9,7 +9,6 @@ function genTableHead($data) {
                     </tr>
                     <tr>
                         <td>90</td>
-                        <td>80</td>
                         <td>70</td>
                         <td>60</td>
                         <td>50</td>
@@ -36,6 +35,7 @@ function genTableRows($data) {
         // - Dan R
         $arrayPointer = 0;
         for ($i=0; $i < 9; $i++) {
+            if ($i == 1) continue; //CANT HAVE RANGE OF 80
             $html .= "<td>\n";
             if (!array_key_exists($arrayPointer, $distances['Distance'])) continue;
             $current = $distances['Distance'][$arrayPointer];

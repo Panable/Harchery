@@ -5,7 +5,7 @@ SELECT CONCAT(a.FirstName, ' ', a.LastName) AS ArcherName,
        rr.ArcherID,
        rr.ID AS RoundRecordID,
        r.Name AS RoundName,
-    r.Range AS RoundRange,
+       r.Range AS RoundRange,
        rr.`Date`,
        SUM(ar.Score) AS TotalScore
 FROM RoundRecord rr

@@ -6,6 +6,14 @@ class archer extends controller
         $this->model = $this->newModel('archermodel');
     }
 
+    function postRequestStageScore()
+    {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $data = $_POST;
+
+        print_r($data);
+    }
+
     public function index()
     {
         $data = [
@@ -39,6 +47,20 @@ class archer extends controller
             
         ];
         $this->view('archer/view_competition_results', $data);
+    }
+
+    public function stageScore()
+    {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->postRequestStageScore();
+            return;
+        }
+
+        $data = [
+        ];
+
+        $this->view('archer/stage_score', $data);
     }
 
 }

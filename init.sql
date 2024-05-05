@@ -10,6 +10,7 @@ Drop Table if exists RoundRecord;
 Drop Table if exists Archer;
 Drop Table if exists Club;
 Drop Table if exists Championship;
+Drop Table if exists Staging;
 SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE Competition (
@@ -60,6 +61,12 @@ CREATE TABLE RoundRecord (
 	FOREIGN KEY (RoundID) REFERENCES `Round`(ID),
 	FOREIGN KEY (Equipment) REFERENCES Division(Equipment),
 	FOREIGN KEY (ArcherID) REFERENCES Archer(ID)
+);
+
+-- All the round records that are 'staged'
+CREATE TABLE Staging (
+	RoundRecordID INT,
+	FOREIGN KEY (RoundRecordID) REFERENCES `RoundRecord`(ID)
 );
 
 CREATE TABLE Arrow (

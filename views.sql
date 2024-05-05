@@ -12,4 +12,6 @@ FROM RoundRecord rr
 JOIN `Round` r ON rr.RoundID = r.ID
 JOIN Arrow ar ON rr.ID = ar.RoundRecordID
 JOIN Archer a ON rr.ArcherID = a.ID
+LEFT JOIN Staging s ON rr.ID = s.RoundRecordID
+WHERE s.RoundRecordID IS NULL
 GROUP BY rr.ArcherID, rr.ID;

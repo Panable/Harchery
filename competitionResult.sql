@@ -13,5 +13,9 @@ INNER JOIN
     Archer AS A ON RR.ArcherID = A.ID
 INNER JOIN 
     Arrow AS Arr ON RR.ID = Arr.RoundRecordID
+LEFT JOIN 
+    Staging AS S ON RR.ID = S.RoundRecordID
+WHERE
+    S.RoundRecordID IS NULL
 ORDER BY 
     Arr.Score DESC;

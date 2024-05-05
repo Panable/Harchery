@@ -3,6 +3,19 @@
 class archermodel extends model
 {
 
+
+    function getRoundNames() {
+        try {
+            $rounds_sql = "SELECT Name From Round Group By Name";
+
+            $this->db->query($rounds_sql);
+            $data = $this->db->resultColumn();
+            return $data;
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
     /* Hard to read function, but basically
     Queries SELECT * From Round
     But that output is hard* to use for the view

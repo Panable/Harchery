@@ -88,4 +88,17 @@ class archermodel extends model
 
         return $processed_rounds;
     }
+
+    function getScores($archerID) {
+        try {
+            $score_sql = "SELECT * FROM ArcherRoundScores WHERE ArcherID=:archerID";
+
+        $this->db->query($score_sql);
+        $this->db->bind(":archerID", $archerID);
+        $data = $this->db->resultSet();
+        return $data;
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
 }

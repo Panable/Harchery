@@ -28,8 +28,15 @@ class archer extends controller
 
     public function viewScore()
     {
+
+        if (!getSession('UserID') || getSession('UserType') != 'Archer')
+            status_msg("You are... uh not an archer?");
+
+        $archer_id = getSession('UserID');
+        $scores = $this->model->getScores($archer_id);
+
         $data = [
-            
+            'Scores' => $scores,
         ];
 
         $this->view('archer/view_score', $data);

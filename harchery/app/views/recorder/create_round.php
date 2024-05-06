@@ -11,10 +11,11 @@
                 </div>
                 <?php
                 $html = '';
-                for ($i = 1; $i <= 9; $i++) {
+                for ($i = 9; $i > 0; $i--) {
                     $distance = $i * 10;
+                    if ($distance == 80) continue;
                     $html .= "<fieldset id={$distance}>
-                                <legend>Distance {$distance}:</legend>
+                                <legend>Range {$distance}:</legend>
                                 <div class=\"mb-3\">
                                     <input type=\"hidden\" id=\"distance{$i}\" name=\"distances[{$i}][distance]\" value=\"{$distance}\">
                                     <label for=\"distances[{$i}][ends]\">Ends:</label>

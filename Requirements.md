@@ -13,7 +13,7 @@
 > CHANGE SQL QUERY ON VIEW
 
 
-- [ ] Archers need to be able to enter their scores into a staging table using a hand-held device.
+- [x] Archers need to be able to enter their scores into a staging table using a hand-held device.
 > For now just use the tables as is (**SHOULD** change eventually)
 
 

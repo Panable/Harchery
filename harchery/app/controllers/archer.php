@@ -19,6 +19,17 @@ class archer extends controller
         }
 
         print_r($data);
+        $decoded_name = str_replace('|', '/', $data['RName']);
+        $decoded_name = str_replace('_', ' ', $decoded_name);
+        
+        $data['RoundName'] = $decoded_name;
+
+        try {
+            $this->model->stageScore($data);
+            status_msg("Ye have successfully staged yer round there bud~!");
+        } catch (Exception $e) {
+            status_msg("FAILED TO STAGE ROUND $e");
+        }
     }
 
     public function index()

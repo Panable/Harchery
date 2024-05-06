@@ -101,4 +101,39 @@ class archermodel extends model
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
+
+    function roundNameAndRangeToID($name, $range)
+    {
+        $sql = "SELECT ID FROM Round WHERE Name = :name AND Range = :range";
+
+        try {
+            $this->db->query($sql);
+            $this->db->bind(':name', $name);
+            $this->db->bind(':Range', $range);
+            return $data = $this->db->resultColumn();
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    // add this functionality
+    function stageScore($data) {
+        $archerID = $data['ArcherID'];
+        $division = $data['Division'];
+        $ranges = $data['Ranges'];
+        $date = $data['Date'];
+        $roundName = $data['RoundName'];
+
+
+        foreach ($ranges as $range) {
+            $roundID = $this->roundNameAndRangeToID($roundName, $range)[0];
+                $round_record_insert = [
+                    '`Date`' => $date,
+                    '`RoundID`' => $roundID,
+                    'Equipment' => $division,
+                    'ArcherID' => $archerID,
+                ];
+                $this->createRow('RoundRecord', $round_record_insert);
+        }
+    }
 }

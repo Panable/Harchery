@@ -1,5 +1,11 @@
 <?php 
 
+function encode_name($name) {
+    $encoded_name = str_replace('/', '|', $name);
+    $encoded_name = str_replace(' ', '_', $encoded_name);
+    return $encoded_name;
+}
+
 function prompt_score($data)
 {
     //unset($_POST['RoundName']);
@@ -16,6 +22,11 @@ function prompt_score($data)
 
     $selects .= "</select>";
 
+    $date = date("Y-m-d");
+
+    $encoded_name = $data['Round'][0]->Name;
+    $encoded_name = encode_name($encoded_name);
+
     $root = URLROOT;
     $html = "<h1>Stage your score.</h1>\n
              <br>
@@ -26,6 +37,10 @@ function prompt_score($data)
                      {$rows}
                  </table>\n
                  {$selects}
+                 <label for=\"Date\">Enter Date:</label>
+                 <input type=\"date\"  name=\"Date\" value=\"{$date}\">
+                 <input type=\"hidden\" id=\"ArcherID\" name=\"ArcherID\" value=\"{$data['ArcherID']}\">
+                 <input type=\"hidden\" id=\"RoundName\" name=\"RName\" value=\"{$encoded_name}\">
                  <button type=\"submit\" class=\"btn btn-primary\">Stage</button>
               </form>";
     echo $html;
@@ -52,7 +67,6 @@ function genTableHead($data)
     $html .= "</thead>\n";
     $html .= "</tr>";
 
-    print_r($data);
     return $html;
 }
 

@@ -77,24 +77,22 @@ function genTableRows($data)
 
     $rounds = $data['Round'];
 
+    $normalized_index = 0;
     foreach ($rounds as $round) {
         $html .= "<tr>\n";
         $html .= "<td>{$round->Range}</td>";
         
         for ($i = 1; $i <= 6; $i++) {
+            $normalized_index++;
             if ($i > $round->TotalEnds) {
                 $html .= "<td></td>";
                 continue;
             }
-            /* <label for="numbersInput">Enter 6 Numbers (Separated by Commas):</label>
-               <input type="text" id="numbersInput" placeholder="e.g., 1,2,3,4,5,6"> */
-
-            $normalized_index = $i - 1;
 
             $html .= "<td>
                           <input type=\"hidden\" id=\"Range\" name=\"Ranges[{$normalized_index}][Range]\" value=\"{$round->Range}\">
                           <input type=\"hidden\" id=\"Range\" name=\"Ranges[{$normalized_index}][End]\" value=\"{$i}\">
-                          <input name=\"Ranges[{$normalized_index}][Scores]\" type=\"text\" id=\"numbersInput\" placeholder=\"e.g., 1,2,3,4,5,6\" value=\"1,2,3,4,5,6\">
+                          <input name=\"Ranges[{$normalized_index}][Scores]\" type=\"text\" id=\"numbersInput\" placeholder=\"e.g., 1,2,3,4,5,6\">
                       </td>";
         }
         $html .= "</tr>\n";

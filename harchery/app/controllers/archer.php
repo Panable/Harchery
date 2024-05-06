@@ -18,7 +18,6 @@ class archer extends controller
             redirect("archer/stageScore/{$encoded_name}");
         }
 
-        print_r($data);
         $decoded_name = str_replace('|', '/', $data['RName']);
         $decoded_name = str_replace('_', ' ', $decoded_name);
         
@@ -105,7 +104,6 @@ class archer extends controller
             $round = $this->model->getRound($decoded_name);
             $division = $this->model->getDivisions();
             $archer_id = getSession('UserID');
-
 
             $data = [
                 'PromptRound' => false,

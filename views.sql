@@ -44,7 +44,7 @@ ORDER BY
 
 -- From: CompetitionResult.sql by Sanya
 -- Requirement?
-CREATE VIEW Competition ArcherScores AS
+CREATE VIEW CompetitionArcherScores AS
 SELECT
     C.ID AS CompetitionID,
     C.Name AS CompetitionName,

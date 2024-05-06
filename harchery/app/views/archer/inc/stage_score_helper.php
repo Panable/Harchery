@@ -1,9 +1,92 @@
 <?php 
 
-function genTableHead() {
+function prompt_score($data)
+{
+    //unset($_POST['RoundName']);
+
+    $head = genTableHead($data);
+    $rows = genTableRows($data);
+
+    $selects = "<label for=\"Division\">What equipment did you shoot?</label>";
+    $selects .= "<select name=\"Division\">\n";
+
+    foreach ($data['Division'] as $division) {
+        $selects .= "<option value=\"$division\">$division</option>\n";
+    }
+
+    $selects .= "</select>";
+
+    $root = URLROOT;
+    $html = "<h1>Stage your score.</h1>\n
+             <br>
+             <h3>{$data['Round'][0]->Name}</h3>
+             <form action=\"{$root}archer/stageScore/{$data['Round'][0]->Name}\" method=\"post\">
+                 <table class=\"table table-bordered table-dark\">\n
+                     {$head}
+                     {$rows}
+                 </table>\n
+                 {$selects}
+                 <button type=\"submit\" class=\"btn btn-primary\">Stage</button>
+              </form>";
+    echo $html;
 }
 
-function genTableRows() {
+function genTableHead($data)
+{
+    $html = "<thead>\n";
+
+    $html .= '<tr>
+                 <th rowspan="2">Range</th>
+                 <th colspan="100%">Ends</th>
+             </tr>';
+
+
+    $rounds = $data['Round'];
+
+    $html .= "<tr>";
+
+    for ($i = 1; $i <= 6; $i++) {
+        $html .= "<td>$i</td>";    
+    }
+
+    $html .= "</thead>\n";
+    $html .= "</tr>";
+
+    print_r($data);
+    return $html;
+}
+
+function genTableRows($data)
+{
+    $html = '';
+    $html .= "<tbody>";
+
+    $rounds = $data['Round'];
+
+    foreach ($rounds as $round) {
+        $html .= "<tr>\n";
+        $html .= "<td>{$round->Range}</td>";
+        
+        for ($i = 1; $i <= 6; $i++) {
+            if ($i > $round->TotalEnds) {
+                $html .= "<td></td>";
+                continue;
+            }
+            /* <label for="numbersInput">Enter 6 Numbers (Separated by Commas):</label>
+               <input type="text" id="numbersInput" placeholder="e.g., 1,2,3,4,5,6"> */
+
+            $normalized_index = $i - 1;
+
+            $html .= "<td>
+                          <input type=\"hidden\" id=\"Range\" name=\"Ranges[{$normalized_index}][Range]\" value=\"{$round->Range}\">
+                          <input type=\"hidden\" id=\"Range\" name=\"Ranges[{$normalized_index}][End]\" value=\"{$i}\">
+                          <input name=\"Ranges[{$normalized_index}][Scores]\" type=\"text\" id=\"numbersInput\" placeholder=\"e.g., 1,2,3,4,5,6\" value=\"1,2,3,4,5,6\">
+                      </td>";
+        }
+        $html .= "</tr>\n";
+    }
+    $html .= "</tbody>";
+    return $html;
 }
 
 // call stage score with post to regenerate new view
@@ -26,15 +109,6 @@ function prompt_round($data)
                 </div>
                 <button type=\"submit\" class=\"btn btn-primary\">Select</button>
             </form>";
-
-    return $html;
-}
-
-function prompt_score($data)
-{
-    $html = '';
-
-    $html .= "<h1>Stage your score.</h1>";
 
     return $html;
 }

@@ -1,4 +1,6 @@
 DROP VIEW IF EXISTS ArcherRoundScores;
+DROP VIEW IF EXISTS CompetitionArcherScores;
+DROP VIEW IF EXISTS ClubCompetitionResults;
 
 -- By Max
 -- Requirement
@@ -19,8 +21,30 @@ WHERE s.RoundRecordID IS NULL
 GROUP BY rr.ArcherID, rr.ID;
 
 
+-- Archers want to look up club competition results and see how everyone has placed and who shot what score.
+-- CompetitionID = 1 for now.
+CREATE VIEW ClubCompetitionResults AS
+SELECT
+    A.FirstName,
+    A.LastName,
+    CR.RoundRecordID,
+    SUM(AR.score) AS TotalScores
+FROM
+    CompetitionRecord CR
+        INNER JOIN RoundRecord RR ON CR.RoundRecordID = RR.ID
+        INNER JOIN Archer A ON RR.ArcherID = A.ID
+        INNER JOIN Arrow AR ON RR.ID = AR.RoundRecordID
+WHERE
+    CR.CompetitionID = 1
+GROUP BY
+    A.ID,
+    CR.RoundRecordID
+ORDER BY
+    TotalScores DESC;
+
 -- From: CompetitionResult.sql by Sanya
 -- Requirement?
+CREATE VIEW Competition ArcherScores AS
 SELECT
     C.ID AS CompetitionID,
     C.Name AS CompetitionName,
@@ -43,25 +67,3 @@ WHERE
 ORDER BY
     Arr.Score DESC;
 
--- Display RoundRecord and total score of the corresponding Arrow
-SELECT
-    RR.ID AS RoundRecordID,
-    RR.`Date`,
-    R.Name AS RoundName,
-    RR.Equipment,
-    A.FirstName,
-    A.LastName,
-    A.DOB,
-    A.Gender,
-    C.Name AS ClubName,
-    SUM(Ar.Score) AS TotalScore
-FROM
-    RoundRecord RR
-        INNER JOIN Archer A ON RR.ArcherID = A.ID
-        INNER JOIN `Round` R ON RR.RoundID = R.ID
-        INNER JOIN Club C ON A.ClubID = C.ID
-        LEFT JOIN Arrow Ar ON RR.ID = Ar.RoundRecordID
-WHERE
-    A.FirstName = 'ArcherFirstName' AND A.LastName = 'ArcherLastName' -- Replace 'ArcherFirstName' and 'ArcherLastName' with the archer's actual first and last names
-GROUP BY
-    RR.ID, RR.`Date`, R.Name, RR.Equipment, A.FirstName, A.LastName, A.DOB, A.Gender, C.Name;

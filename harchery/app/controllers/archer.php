@@ -14,8 +14,11 @@ class archer extends controller
         if (isset($data['RoundName'])) { // Round has been selected
             $name = htmlspecialchars($data['RoundName']);
             $encoded_name = str_replace('/', '|', $name);
+            $encoded_name = str_replace(' ', '_', $encoded_name);
             redirect("archer/stageScore/{$encoded_name}");
         }
+
+        print_r($data);
     }
 
     public function index()
@@ -81,6 +84,7 @@ class archer extends controller
             // Get Some Round Shit
 
             $decoded_name = str_replace('|', '/', $round);
+            $decoded_name = str_replace('_', ' ', $decoded_name);
             //echo "<h1>$decoded_name</h1>";
 
 

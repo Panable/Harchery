@@ -1,7 +1,7 @@
 # Archers
 
 ## Scores
-- [ ] An archer needs to be able to look up their own scores over time.
+- [x] An archer needs to be able to look up their own scores over time.
 > Display each round record and total the score on each corresponding arrow
 
 

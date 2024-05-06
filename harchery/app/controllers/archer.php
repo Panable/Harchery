@@ -16,8 +16,6 @@ class archer extends controller
             $encoded_name = str_replace('/', '|', $name);
             redirect("archer/stageScore/{$encoded_name}");
         }
-
-        print_r($data);
     }
 
     public function index()
@@ -67,7 +65,7 @@ class archer extends controller
         if ($is_prompt) {
             $round_names = $this->model->getRoundNames();
             $data = [
-                'prompt_round' => true,
+                'PromptRound' => true,
                 'round_names' => $round_names,
             ];
 
@@ -76,10 +74,22 @@ class archer extends controller
             // Get Some Round Shit
 
             $decoded_name = str_replace('|', '/', $round);
-            echo "<h1>$decoded_name</h1>";
+            //echo "<h1>$decoded_name</h1>";
+
+
+            if (!getSession('UserID') || getSession('UserType') != 'Archer')
+                status_msg("You are... uh not an archer?");
+
+            $round = $this->model->getRound($decoded_name);
+            $division = $this->model->getDivisions();
+            $archer_id = getSession('UserID');
+
 
             $data = [
-                'prompt_round' => false,
+                'PromptRound' => false,
+                'Round' => $round,
+                'Division' => $division,
+                'ArcherID' => $archer_id,
             ];
             $this->view('archer/stage_score', $data);
         }

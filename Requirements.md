@@ -6,11 +6,11 @@
 
 
 - [ ] Restrict the number of scores by date range and by the type of round.
-> Simple filter 
+> CHANGE SQL QUERY ON VIEW
 
 
 - [ ] Score listings have to be able to be sorted by date and score (generally highest first).
-> Simple filter
+> CHANGE SQL QUERY ON VIEW
 
 
 - [ ] Archers need to be able to enter their scores into a staging table using a hand-held device.

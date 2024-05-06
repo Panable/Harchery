@@ -1,8 +1,12 @@
 <?php 
 
+function genTableHead() {
+}
+
+function genTableRows() {
+}
 
 // call stage score with post to regenerate new view
-
 function prompt_round($data)
 {
     $select = '';
@@ -30,7 +34,7 @@ function prompt_score($data)
 {
     $html = '';
 
-    $html .= "<h1>PROMPTING SCORE</h1>";
+    $html .= "<h1>Stage your score.</h1>";
 
     return $html;
 }
@@ -40,7 +44,7 @@ function generate_form($data)
     $html = '';
 
     
-    if ($data['prompt_round'])
+    if ($data['PromptRound'])
        $html = prompt_round($data);
     else
        $html = prompt_score($data);

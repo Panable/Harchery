@@ -16,6 +16,35 @@ class archermodel extends model
         }
     }
 
+    function getDivisions() {
+        try {
+            $rounds_sql = "SELECT Equipment From Division";
+
+            $this->db->query($rounds_sql);
+            $data = $this->db->resultColumn();
+            return $data;
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    function getRound($search_name)
+    {
+        try {
+            $sql = "SELECT *
+                    FROM Round WHERE Name=:name 
+                    ORDER BY `Range` DESC;";
+
+            $this->db->query($sql);
+            $this->db->bind(":name", $search_name);
+            $this->db->execute();
+            return $this->db->resultSet();
+
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
     /* Hard to read function, but basically
     Queries SELECT * From Round
     But that output is hard* to use for the view

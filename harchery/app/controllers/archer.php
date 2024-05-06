@@ -17,6 +17,8 @@ class archer extends controller
             $encoded_name = str_replace(' ', '_', $encoded_name);
             redirect("archer/stageScore/{$encoded_name}");
         }
+
+        print_r($data);
     }
 
     public function index()

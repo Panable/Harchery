@@ -91,7 +91,7 @@ class archermodel extends model
 
     function getScores($archerID) {
         try {
-            $score_sql = "SELECT * FROM ArcherRoundScores WHERE ArcherID=:archerID";
+            $score_sql = "SELECT * FROM ArcherRoundScores WHERE ArcherID = :archerID";
 
         $this->db->query($score_sql);
         $this->db->bind(":archerID", $archerID);

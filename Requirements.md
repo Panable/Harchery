@@ -25,7 +25,7 @@
 
 - [ ] Archers want to look up club competition results and see how everyone has placed and who shot what score.
 
-> Have page of championships held in club. chapionships table to match specific clubid
+> Have page of championships held in club. championship table to match specific clubid
 > When click on specific championship, show all results (passing competitionid)
 > To show all results, use competitionid to get all competition records linking with round record and archer (tallying up their score like above)
 

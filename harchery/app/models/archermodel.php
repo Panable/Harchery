@@ -145,10 +145,10 @@ class archermodel extends model
                     'Score' => $score, 
                 ]);
             }
-            $this->createRow(
-            "Staging", [
-                'RoundRecordID' => $roundRecordID, 
-            ]);
+            // $this->createRow(
+            // "Staging", [
+            //     'RoundRecordID' => $roundRecordID, 
+            // ]);
         }
     }
 }

@@ -1,6 +1,6 @@
 
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="d-flex flex-column overflow-hidden min-vh-100 vh-100">
+<div class="card-body text-center overflow bg-dark text-white p-4 m-5 rounded-3">
     <?php require APPROOT . '/views/inc/navbar.php'; ?>
     <main role="main" class="flex-grow-1 overflow-scroll d-flex flex-column align-items-center justify-content-center" style="color: white; text-align:center;">
         <h1>Competition Results</h1>
@@ -12,10 +12,10 @@
         </form>
         <?php
         // Database connection
-        $host = "harchery-mysql-1"; // Host name
-        $username = "root"; // Mysql username
-        $password = "password"; // Mysql password
-        $database = "harcher"; // Database name
+        $host = "harchery-mysql-1";
+        $username = "root";
+        $password = "password";
+        $database = "harcher";
         // Create connection
         $conn = mysqli_connect($host, $username, $password, $database);
         // Check connection
@@ -24,7 +24,7 @@
         }
         if (isset($_GET['competition_name'])) {
             $searchTerm = $_GET['competition_name'];
-            // Execute SQL query
+            
             $query = "SELECT C.ID AS CompetitionID,
                              C.Name AS CompetitionName,
                              CONCAT(A.FirstName, ' ', A.LastName) AS ArcherFullName,
@@ -34,6 +34,9 @@
                       INNER JOIN RoundRecord AS RR ON CD.RoundID = RR.RoundID
                       INNER JOIN Archer AS A ON RR.ArcherID = A.ID
                       INNER JOIN Arrow AS Arr ON RR.ID = Arr.RoundRecordID
+                    --   LEFT JOIN Staging AS S ON RR.ID = S.RoundRecordID
+                        -- LEFT JOIN Staging AS S ON RR.ID = S.RoundRecordID
+                        -- WHERE S.RoundRecordID IS NULL
                       WHERE C.Name LIKE '%$searchTerm%'
                       ORDER BY Arr.Score DESC";
             $results = mysqli_query($conn, $query);
@@ -55,7 +58,7 @@
                 echo "<p>No results found for '{$searchTerm}'</p>";
             }
         }
-        // Close database connection
+      
         mysqli_close($conn);
         ?>
     </main>

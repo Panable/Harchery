@@ -31,7 +31,7 @@ function prompt_score($data)
     $html = "<h1>Stage your score.</h1>\n
              <br>
              <h3>{$data['Round'][0]->Name}</h3>
-             <form action=\"{$root}archer/stageScore/{$data['Round'][0]->Name}\" method=\"post\">
+             <form action=\"{$root}archer/stageScore/$encoded_name\" method=\"post\">
                  <table class=\"table table-bordered table-dark\">\n
                      {$head}
                      {$rows}
@@ -61,7 +61,7 @@ function genTableHead($data)
     $html .= "<tr>";
 
     for ($i = 1; $i <= 6; $i++) {
-        $html .= "<td>$i</td>";    
+        $html .= "<td>$i</td>";
     }
 
     $html .= "</thead>\n";
@@ -92,7 +92,7 @@ function genTableRows($data)
             $html .= "<td>
                           <input type=\"hidden\" id=\"Range\" name=\"Ranges[{$normalized_index}][Range]\" value=\"{$round->Range}\">
                           <input type=\"hidden\" id=\"Range\" name=\"Ranges[{$normalized_index}][End]\" value=\"{$i}\">
-                          <input name=\"Ranges[{$normalized_index}][Scores]\" type=\"text\" id=\"numbersInput\" placeholder=\"e.g., 1,2,3,4,5,6\" value='6,6,6,6,6,6'>
+                          <input name=\"Ranges[{$normalized_index}][Scores]\" type=\"text\" id=\"numbersInput\" placeholder=\"e.g., 1,2,3,4,5,6\">
                       </td>";
         }
         $html .= "</tr>\n";

@@ -23,8 +23,8 @@
             die("Connection failed: " . mysqli_connect_error());
         }
         if (isset($_GET['competition_name'])) {
-            $searchTerm = $_GET['competition_name'];
-            
+            $searchTerm = mysqli_real_escape_string($conn, $_GET['competition_name']);  //checks input and escapes unwanted characters preventing sql injection.
+            mysqli_real_escape_string($conn, $searchTerm);
             $query = "SELECT C.ID AS CompetitionID,
                              C.Name AS CompetitionName,
                              CONCAT(A.FirstName, ' ', A.LastName) AS ArcherFullName,
@@ -37,6 +37,7 @@
                         LEFT JOIN Staging AS S ON RR.ID = S.RoundRecordID
                         WHERE C.Name LIKE '%$searchTerm%'
                         ORDER BY Arr.Score DESC";
+                        
             $results = mysqli_query($conn, $query);
             if (mysqli_num_rows($results) > 0) {
                 echo "<h2>Search Results for '{$searchTerm}':</h2>";

@@ -72,7 +72,13 @@ class archer extends controller
         ];
         $this->view('archer/view_competition_results', $data);
     }
-
+    public function viewChampionshipResults()
+    {
+        $data = [
+            
+        ];
+        $this->view('archer/view_championship_results', $data);
+    }
     public function stageScore($round)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

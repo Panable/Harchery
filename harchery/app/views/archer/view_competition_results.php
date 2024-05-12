@@ -25,19 +25,28 @@
         if (isset($_GET['competition_name'])) {
             $searchTerm = mysqli_real_escape_string($conn, $_GET['competition_name']);  //checks input and escapes unwanted characters preventing sql injection.
             mysqli_real_escape_string($conn, $searchTerm);
-            $query = "SELECT C.ID AS CompetitionID,
-                             C.Name AS CompetitionName,
-                             CONCAT(A.FirstName, ' ', A.LastName) AS ArcherFullName,
-                             Arr.Score AS ArcherScore
-                        FROM Competition AS C
-                        INNER JOIN CompetitionDetails AS CD ON C.ID = CD.CompetitionID
-                        INNER JOIN RoundRecord AS RR ON CD.RoundID = RR.RoundID
-                        INNER JOIN Archer AS A ON RR.ArcherID = A.ID
-                        INNER JOIN Arrow AS Arr ON RR.ID = Arr.RoundRecordID
-                        LEFT JOIN Staging AS S ON RR.ID = S.RoundRecordID
-                        WHERE C.Name LIKE '%$searchTerm%'
-                        ORDER BY Arr.Score DESC";
-                        
+            
+            $query = "SELECT 
+            C.ID AS CompetitionID,
+            C.Name AS CompetitionName,
+            CONCAT(A.FirstName, ' ', A.LastName) AS ArcherFullName,
+            SUM(Arr.Score) AS ArcherScore
+            FROM 
+            Competition AS C
+            INNER JOIN CompetitionDetails AS CD ON C.ID = CD.CompetitionID
+            INNER JOIN RoundRecord AS RR ON CD.RoundID = RR.RoundID
+            INNER JOIN Archer AS A ON RR.ArcherID = A.ID
+            INNER JOIN Arrow AS Arr ON RR.ID = Arr.RoundRecordID
+            LEFT JOIN Staging AS S ON RR.ID = S.RoundRecordID
+            WHERE 
+            C.Name LIKE '%$searchTerm%'
+            GROUP BY 
+            C.ID,
+            C.Name,
+            CONCAT(A.FirstName, ' ', A.LastName)
+            ORDER BY 
+            CompetitionID ASC";
+                    
             $results = mysqli_query($conn, $query);
             if (mysqli_num_rows($results) > 0) {
                 echo "<h2>Search Results for '{$searchTerm}':</h2>";

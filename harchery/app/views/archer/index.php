@@ -9,8 +9,9 @@
                 <h1 class="card-text">Mr Archer. What do ye want do?</h1>
                 <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewScore>1. View archer's score</a><br>
                 <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewCompetitionResults>2. View competition result</a><br>
-                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewRounds>3. View round definitions</a><br>
-                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/stageScore/-1>4. Stage a new score</a><br>
+                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewChampionshipResults>3. View Championship result</a><br>
+                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewRounds>4. View round definitions</a><br>
+                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/stageScore/-1>5. Stage a new score</a><br>
                 
             </div>
         </div>

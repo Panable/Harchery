@@ -22,7 +22,7 @@ function prompt_score($data)
 
     $selects .= "</select>";
 
-    $date = date("Y-m-d");
+    $date = date("Y-m-d H:i:s");
 
     $encoded_name = $data['Round'][0]->Name;
     $encoded_name = encode_name($encoded_name);
@@ -38,7 +38,7 @@ function prompt_score($data)
                  </table>\n
                  {$selects}
                  <label for=\"Date\">Enter Date:</label>
-                 <input type=\"date\"  name=\"Date\" value=\"{$date}\">
+                 <input type=\"datetime-local\"  name=\"Date\" value=\"{$date}\">
                  <input type=\"hidden\" id=\"ArcherID\" name=\"ArcherID\" value=\"{$data['ArcherID']}\">
                  <input type=\"hidden\" id=\"RoundName\" name=\"RName\" value=\"{$encoded_name}\">
                  <button type=\"submit\" class=\"btn btn-primary\">Stage</button>

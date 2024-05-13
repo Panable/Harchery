@@ -32,5 +32,5 @@ def insert_fake_data_to_file(file_path, archer):
             f.write("\t ('{}', '{}', '{}', '{}', {}),\n".format(item[0], item[1], item[2], item[3], item[4]))  # Write SQL statements
         print(f"{len(data)} rows inserted to {file_path}.")                                                          # Print the number of rows inserted
 
-# Modify Parameters: filepath & Archer
+# Modify Parameters: filepath (fake_Archer.sql) & Archer (500)
 insert_fake_data_to_file("fake_Archer.sql", 500)

@@ -94,7 +94,7 @@ def generate_round_records(num_records, archer_data):
 
 
 # Load archer data from CSV file
-archer_data = load_archer_data('fake_archer.csv')
+archer_data = load_archer_data('fake_Archer.csv')
 
 # Example: Generate RoundRecord data
 round_records_data = generate_round_records(200, archer_data)

@@ -23,6 +23,7 @@ def generate_fake_competition(competition):
 def insert_fake_data_to_file(file_path, competition):
     data = generate_fake_competition(competition)               # Generate fake competition data
     with open(file_path, 'w') as f:
+        f.write('SET FOREIGN_KEY_CHECKS = 0;\n')
         f.write('INSERT INTO Competition (Name)\nVALUES')       # Write the beginning of the SQL statement
         for idx, item in enumerate(data):
             if idx == len(data) - 1:
@@ -30,6 +31,7 @@ def insert_fake_data_to_file(file_path, competition):
             else:
                 f.write("\t ('{}'),\n".format(item[0]))         # Write SQL statements with commas
         print(f"{len(data)} rows inserted to {file_path}.")     # Print the number of rows inserted
+        f.write('SET FOREIGN_KEY_CHECKS = 1;')                  # Write the end of the SQL statement
 
 
 # Modify Parameters: file_path & competition

@@ -14,14 +14,20 @@ def generate_fake_championship_data(num_records):
     return data
 
 # Insert fake data into a file
-def insert_fake_data_to_file(file_path, num_records):
-    with open(file_path, 'w') as f:
-        data = generate_fake_championship_data(num_records)
-        f.write(f"INSERT INTO Championship (ClubID, CompetitionID), \n")
-        f.write(f"VALUES",)
-        for item in data:
-            f.write(f" \t {item},\n")
-        print(f"{len(data)} rows inserted successfully to {file_path}.")
+def insert_fake_data_to_file(file_path, data):
+    with open(file_path, 'w') as sql_file:
+        sql_file.write("SET FOREIGN_KEY_CHECKS = 0;\n")
+        sql_file.write("INSERT INTO Championship (ClubID, CompetitionID) VALUES\n")
+        for idx, record in enumerate(data):
+            if idx == len(data) - 1:
+                sql_file.write(f"\t{record}\n")  # Write the last entry without a comma
+            else:
+                sql_file.write(f"\t{record},\n")
+        sql_file.write(";")
+        sql_file.write("SET FOREIGN_KEY_CHECKS = 1;")
 
-# Modify Parameters: file_path & num_records
-insert_fake_data_to_file("fake_championship.sql", 150)
+# Generate fake championship data
+fake_championship_data = generate_fake_championship_data(150)
+
+# Modify Parameters: file_path & fake_championship_data
+insert_fake_data_to_file("fake_championship.sql", fake_championship_data)

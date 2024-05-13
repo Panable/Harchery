@@ -107,14 +107,15 @@ round_records_data = generate_round_records(200, archer_data)
 # Function to write generated RoundRecord entries to SQL file
 def write_round_records_to_sql(file_path, round_records):
     with open(file_path, 'w') as sql_file:
+        sql_file.write("SET FOREIGN_KEY_CHECKS = 0;\n")
         sql_file.write("INSERT INTO RoundRecord (Date, RoundID, Equipment, ArcherID) VALUES\n")
-        for record in round_records:
-            sql_file.write(f"\t('{record[0]}', {record[1]}, '{record[2]}', {record[3]}),\n")
-        # Remove the trailing comma from the last entry
-        sql_file.seek(sql_file.tell() - 2, 0)
-        sql_file.truncate()
+        for idx, record in enumerate(round_records):
+            if idx == len(round_records) - 1:
+                sql_file.write(f"\t('{record[0]}', {record[1]}, '{record[2]}', {record[3]})\n")  # Write the last entry without a comma
+            else:
+                sql_file.write(f"\t('{record[0]}', {record[1]}, '{record[2]}', {record[3]}),\n")
         sql_file.write(";")
-
+        sql_file.write("SET FOREIGN_KEY_CHECKS = 1;")
 
 # Example: Write generated RoundRecord entries to SQL file
 write_round_records_to_sql('fake_round_records.sql', round_records_data)

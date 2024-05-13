@@ -53,7 +53,7 @@ def calculate_age(born):
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
 
-# Function to generate round records for archers
+# Function to generate round records for archers within the time range of 8AM to 7PM
 def generate_round_records(num_records, archer_data):
     round_records = []
     last_date_by_club = {}  # Dictionary to store the last generated date for each club
@@ -81,14 +81,18 @@ def generate_round_records(num_records, archer_data):
                     round_group = random.choice(Rounds)  # Randomly select a round format from Rounds
                     equipment = random.choice(equipment_options)  # Randomly select equipment for the archer
                     for round_id in round_group:
+                        # Increment time by 2 minutes for each round
+                        last_date += timedelta(minutes=2)
+                        # Check if the time is within the range of 8AM to 7PM
+                        if last_date.hour < 8:
+                            last_date = last_date.replace(hour=8, minute=0, second=0)
+                        elif last_date.hour >= 19:
+                            last_date = last_date.replace(hour=19, minute=0, second=0)
+                            # Move to the next day if the time exceeds 7PM
+                            last_date += timedelta(days=1)
                         # Append round record for the archer with generated data
-                        round_records.append((last_date.strftime('%Y-%m-%d'), round_id, equipment, archer_id))
+                        round_records.append((last_date.strftime('%Y-%m-%d %H:%M:%S'), round_id, equipment, archer_id))
                         archer_round_generated = True  # Set flag to indicate that a round record is generated for the archer
-
-            # Update last date after generating rounds for the archer
-            if last_date:
-                last_date_by_club[club_id] = last_date + timedelta(
-                    days=random.randint(1, 7))  # Move to the next week for the next round
     return round_records
 
 

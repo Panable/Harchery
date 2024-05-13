@@ -35,4 +35,4 @@ def insert_fake_data_to_file(file_path, competition):
 
 
 # Modify Parameters: file_path & competition
-insert_fake_data_to_file("fake_Competition.sql", 500)
+insert_fake_data_to_file("fake_competition.sql", 150)

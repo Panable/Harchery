@@ -5,21 +5,33 @@ DROP VIEW IF EXISTS ClubCompetitionResults;
 -- By Max
 -- Requirement
 CREATE VIEW ArcherRoundScores AS
+-- Links Firstname and Lastname together
 SELECT CONCAT(a.FirstName, ' ', a.LastName) AS ArcherName,
-       rr.ArcherID,
-       rr.ID AS RoundRecordID,
-       r.Name AS RoundName,
-       r.Range AS RoundRange,
-       rr.`Date`,
-       SUM(ar.Score) AS TotalScore
+    -- ArcherID is needed for sessions
+    rr.ArcherID,
+    r.Name AS RoundName,
+    r.Range AS RoundRange,
+    rr.`Date`,
+    -- Calculates total of all arrows within a round
+    SUM(ar.Score) AS TotalScore
+-- Takes the data from RoundRecord table
 FROM RoundRecord rr
+-- Joins relevant data from Round table
 JOIN `Round` r ON rr.RoundID = r.ID
-JOIN Arrow ar ON rr.ID = ar.RoundRecordID
+-- subquery calculates the sum of the scores for each arrow, grouped by roundRecordId
+JOIN (
+    SELECT RoundRecordID, SUM(Score) AS Score
+    FROM Arrow
+    GROUP BY RoundRecordID
+) ar ON rr.ID = ar.RoundRecordID
+-- Joins relevant data from Round table
 JOIN Archer a ON rr.ArcherID = a.ID
+-- filters out roundRecords that have staging data
 LEFT JOIN Staging s ON rr.ID = s.RoundRecordID
+-- Filters out rows where staging data exists
 WHERE s.RoundRecordID IS NULL
-GROUP BY rr.ArcherID, rr.ID;
-
+-- I forgot to add a comment here :) 
+GROUP BY rr.ArcherID, r.Name, r.Range, rr.`Date`;
 
 -- Archers want to look up club competition results and see how everyone has placed and who shot what score.
 -- CompetitionID = 1 for now.

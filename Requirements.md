@@ -64,8 +64,8 @@
 - [x] The database has to have all the information needed to identify the archer’s division
 > Already done, store age, gender, etc.
 
-- [ ] There should be a definition of the default equipment, so that the category can be identified in the absence of user input
-> Done in frontend
+- [x] There should be a definition of the default equipment, so that the category can be identified in the absence of user input
+> Done in frontend -> In the absence of user input the default equipment is the compound bow.
 
 - [x] The equivalent rounds have to be time-dependent,This would make past competitions invalid, so there needs to be a history.
 > Time is being stored in the round records

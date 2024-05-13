@@ -12,24 +12,24 @@ equipment_options = ['Recurve', 'Compound', 'Recurve Barebow', 'Compound Barebow
 
 # Define the possible round formats for archery competitions
 Rounds = [
-    [1, 2, 3, 4],  # WA90/1440
-    [5, 6, 7],  # WA80/1440
-    [8, 9, 10],  # WA70/1440
-    [11, 12, 13],  # Junior Canberra
-    [14, 15, 16],  # Melbourne
-    [17, 18, 19],  # Long Sydney
-    [20, 21, 22],  # Sydney
-    [23, 24, 25],  # Long Brisbane
-    [26, 27, 28],  # Brisbane
-    [29, 30, 31],  # Adelaide
-    [32, 33],  # Short Adelaide
-    [34, 35, 36],  # WA60/1440
-    [37, 38, 39],  # WA55/1440
-    [40, 41, 42],  # WA50/1440
-    [43, 44, 45],  # WA45/1440
-    [46, 47, 48],       # WA40/1440
-    [49, 50],           # WA3/720
-    [51, 52, 53, 54]    # FITA
+    [1, 2, 3, 4],    # WA90/1440
+    [5, 6, 7],       # WA80/1440
+    [8, 9, 10],      # WA70/1440
+    [11, 12, 13],    # Junior Canberra
+    [14, 15, 16],    # Melbourne
+    [17, 18, 19],    # Long Sydney
+    [20, 21, 22],    # Sydney
+    [23, 24, 25],    # Long Brisbane
+    [26, 27, 28],    # Brisbane
+    [29, 30, 31],    # Adelaide
+    [32, 33],        # Short Adelaide
+    [34, 35, 36],    # WA60/1440
+    [37, 38, 39],    # WA55/1440
+    [40, 41, 42],    # WA50/1440
+    [43, 44, 45],    # WA45/1440
+    [46, 47, 48],    # WA40/1440
+    [49, 50],        # WA3/720
+    [51, 52, 53, 54] # FITA
 ]
 
 

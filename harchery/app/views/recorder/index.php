@@ -12,6 +12,8 @@
                 <a class="link-secondary" href=<?php echo URLROOT; ?>recorder/createCompetition>2. Add a new competition</a>
                 <br>
                 <a class="link-secondary" href=<?php echo URLROOT; ?>recorder/createRound>3. Add a new round</a>
+                <br>
+                <a class="link-secondary" href=<?php echo URLROOT; ?>recorder/viewStaging>4. View staged scores.</a>
             </div>
         </div>
     </main>

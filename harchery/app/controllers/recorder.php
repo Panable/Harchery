@@ -136,4 +136,14 @@ class recorder extends controller
 
         $this->view('recorder/create_competition', $data);
     }
+
+    public function viewStaging()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->postRequestRoundCreate();
+            return;
+        }
+
+        $this->view('recorder/view_staging');
+    }
 }

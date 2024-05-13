@@ -54,7 +54,7 @@ CREATE TABLE Archer (
 
 CREATE TABLE RoundRecord (
 	ID INT PRIMARY KEY AUTO_INCREMENT,
-	`Date` DATE,
+	`Date` DATETIME,
 	RoundID INT,
 	Equipment VARCHAR(255),
 	ArcherID INT,

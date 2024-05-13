@@ -31,6 +31,31 @@ class archer extends controller
         }
     }
 
+    function postRequestEnterScore()
+    {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $data = $_POST;
+
+        if (isset($data['RoundName'])) { // Round has been selected
+            $name = htmlspecialchars($data['RoundName']);
+            $encoded_name = str_replace('/', '|', $name);
+            $encoded_name = str_replace(' ', '_', $encoded_name);
+            redirect("archer/enterScore/{$encoded_name}");
+        }
+
+        $decoded_name = str_replace('|', '/', $data['RName']);
+        $decoded_name = str_replace('_', ' ', $decoded_name);
+        
+        $data['RoundName'] = $decoded_name;
+
+        try {
+            $this->model->enterScore($data);
+            status_msg("Ye have successfully entered yer round there bud~!");
+        } catch (Exception $e) {
+            status_msg("FAILED TO ENTER ROUND $e");
+        }
+    }
+
     public function index()
     {
         $data = [
@@ -118,6 +143,49 @@ class archer extends controller
                 'ArcherID' => $archer_id,
             ];
             $this->view('archer/stage_score', $data);
+        }
+
+    }
+
+    public function enterScore($round)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->postRequestEnterScore();
+            return;
+        }
+
+        $is_prompt = ($round == -1);
+        
+        if ($is_prompt) {
+            $round_names = $this->model->getRoundNames();
+            $data = [
+                'PromptRound' => true,
+                'round_names' => $round_names,
+            ];
+
+            $this->view('archer/enter_score', $data);
+        } else {
+            // Get Some Round Shit
+
+            $decoded_name = str_replace('|', '/', $round);
+            $decoded_name = str_replace('_', ' ', $decoded_name);
+            //echo "<h1>$decoded_name</h1>";
+
+
+            if (!getSession('UserID') || getSession('UserType') != 'Archer')
+                status_msg("You are... uh not an archer?");
+
+            $round = $this->model->getRound($decoded_name);
+            $division = $this->model->getDivisions();
+            $archer_id = getSession('UserID');
+
+            $data = [
+                'PromptRound' => false,
+                'Round' => $round,
+                'Division' => $division,
+                'ArcherID' => $archer_id,
+            ];
+            $this->view('archer/enter_score', $data);
         }
 
     }

@@ -47,7 +47,7 @@
 > Page for creating archers, page for creating new competitions, page for creating new rounds. Competition is the most complicated and even that's not that complicated.
 
 
-- [ ] Be able to add new scores that archers have staged on their mobile devices.
+- [x] Be able to add new scores that archers have staged on their mobile devices.
 > Again with the staging, eventually we should have a separate table for staging, but for now allow them to edit archer scores or something
 
 

@@ -151,4 +151,34 @@ class archermodel extends model
             ]);
         }
     }
+
+    function enterScore($data) {
+        $archerID = $data['ArcherID'];
+        $division = $data['Division'];
+        $ranges = $data['Ranges'];
+        $date = $data['Date'];
+        $roundName = $data['RoundName'];
+
+        foreach ($ranges as $record) {
+            $range = $record['Range'];
+            $roundID = $this->roundNameAndRangeToID($roundName, $range);
+            $round_record_insert = [
+                '`Date`' => $date,
+                '`RoundID`' => $roundID,
+                'Equipment' => $division,
+                'ArcherID' => $archerID,
+            ];
+            $this->createRow('RoundRecord', $round_record_insert);
+            $roundRecordID = $this->db->getLastInsertID();
+            $scores = explode(',', $record['Scores']);
+            foreach ($scores as $index => $score) {
+                $this->createRow(
+                "Arrow", [
+                    'RoundRecordID' => $roundRecordID, 
+                    "PertainingEnd" => $index + 1, 
+                    'Score' => $score, 
+                ]);
+            }
+        }
+    }
 }

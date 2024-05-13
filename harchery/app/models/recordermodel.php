@@ -147,4 +147,45 @@ class recordermodel extends model
         }
     }
 
+    function viewStagedScores($club_id)
+    {
+        $sql = "SELECT * FROM StagedRounds WHERE ClubID=:clubID";
+
+        try {
+            $this->db->query($sql);
+            $this->db->bind(':clubID', $club_id);
+            return $data = $this->db->resultSet();
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    function acceptStagedScore($stageData)
+    {
+        // where stagedata = 
+        $sql = "DELETE FROM Staging WHERE RoundRecordID IN ($stageData)";
+        try {
+            $this->db->query($sql);
+            $this->db->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    function denyStagedScore($stageData)
+    {
+        try {
+            $sql = "DELETE FROM Staging WHERE RoundRecordID IN ($stageData)";
+            $this->db->query($sql);
+            $this->db->execute();
+            $sql = "DELETE FROM Arrow WHERE RoundRecordID IN ($stageData)";
+            $this->db->query($sql);
+            $this->db->execute();
+            $sql = "DELETE FROM RoundRecord WHERE ID IN ($stageData)";
+            $this->db->query($sql);
+            $this->db->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
 }

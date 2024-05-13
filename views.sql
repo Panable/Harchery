@@ -1,6 +1,7 @@
 DROP VIEW IF EXISTS ArcherRoundScores;
 DROP VIEW IF EXISTS CompetitionArcherScores;
 DROP VIEW IF EXISTS ClubCompetitionResults;
+DROP VIEW IF EXISTS StagedRounds;
 
 -- By Max
 -- Requirement
@@ -79,3 +80,23 @@ WHERE
 ORDER BY
     Arr.Score DESC;
 
+CREATE VIEW StagedRounds AS
+SELECT 
+    Archer.FirstName,
+    Archer.LastName,
+    `Round`.Name AS RoundName,
+    RoundRecord.`Date`,
+    GROUP_CONCAT(DISTINCT RoundRecord.ID ORDER BY RoundRecord.ID ASC SEPARATOR ', ') AS PertainingRoundRecordIDs,
+    Club.ID AS ClubID
+FROM 
+    RoundRecord
+INNER JOIN 
+    Staging ON RoundRecord.ID = Staging.RoundRecordID
+INNER JOIN 
+    Archer ON RoundRecord.ArcherID = Archer.ID
+INNER JOIN 
+    `Round` ON RoundRecord.RoundID = `Round`.ID
+INNER JOIN 
+    Club ON Archer.ClubID = Club.ID
+GROUP BY 
+    Archer.FirstName, Archer.LastName, `Round`.Name, RoundRecord.`Date`, Club.ID;

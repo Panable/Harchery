@@ -17,7 +17,7 @@
 > For now just use the tables as is (**SHOULD** change eventually)
 
 
-- [ ] Able to record a date and time, round, equipment.
+- [x] Able to record a date and time, round, equipment.
 > Just create a round record, with arrows
 
 - [x] Archers have to be able to look up definitions of rounds, i.e. what ranges make up the round.

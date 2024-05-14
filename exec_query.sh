@@ -21,7 +21,6 @@ docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < $
 
 cd PythonScripts
 
-for f in *.py; do python "$f"; done
 fake_round_record='fake_round_records.sql'
 fake_arrow='fake_arrow_data.sql'
 fake_competition='fake_competition.sql'
@@ -29,11 +28,16 @@ fake_championship='fake_championship.sql'
 fake_competition_record='fake_competitionrecord.sql'
 fake_competition_details='fake_competition_details.sql'
 
-# Fake
+python GenRoundRecord.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_round_record}
+python GenArrow.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_arrow}
+python GenCompetition.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition}
+python GenChampionship.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_championship}
+python GenCompetitionRecord.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition_record}
+python GenCompetitonDetail.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition_details}
 cd ..

@@ -174,16 +174,20 @@ class recordermodel extends model
         // where stagedata = 
         $sql = "DELETE FROM Staging WHERE RoundRecordID IN ($stageData)";
         try {
+            $this->db->beginTransaction();
             $this->db->query($sql);
             $this->db->execute();
         } catch (PDOException $e) {
+            $this->db->rollback();
             throw new Exception("Database error: " . $e->getMessage());
         }
+        $this->db->commit();
     }
 
     function denyStagedScore($stageData)
     {
         try {
+            $this->db->beginTransaction();
             $sql = "DELETE FROM Staging WHERE RoundRecordID IN ($stageData)";
             $this->db->query($sql);
             $this->db->execute();
@@ -194,7 +198,9 @@ class recordermodel extends model
             $this->db->query($sql);
             $this->db->execute();
         } catch (PDOException $e) {
+            $this->db->rollback();
             throw new Exception("Database error: " . $e->getMessage());
         }
+        $this->db->commit();
     }
 }

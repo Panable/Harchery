@@ -49,6 +49,7 @@ CREATE TABLE Archer (
 	DOB DATE,
 	Gender VARCHAR(255),
 	ClubID INT,
+	INDEX ClubID,
 	FOREIGN KEY (ClubID) REFERENCES Club(ID)
 );
 
@@ -58,6 +59,7 @@ CREATE TABLE RoundRecord (
 	RoundID INT,
 	Equipment VARCHAR(255),
 	ArcherID INT,
+	INDEX ArcherID,
 	FOREIGN KEY (RoundID) REFERENCES `Round`(ID),
 	FOREIGN KEY (Equipment) REFERENCES Division(Equipment),
 	FOREIGN KEY (ArcherID) REFERENCES Archer(ID)
@@ -74,6 +76,7 @@ CREATE TABLE Arrow (
 	RoundRecordID INT,
 	PertainingEnd INT,
 	Score INT,
+	INDEX RoundRecordID,
 	FOREIGN KEY (RoundRecordID) REFERENCES RoundRecord(ID)
 );
 

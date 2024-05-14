@@ -2,7 +2,7 @@ import mysql.connector
 import random
 
 # Database connection details
-DB_HOST = 'localhost'
+DB_HOST = '127.0.0.1'
 DB_USER = 'root'
 DB_PASS = 'password'
 DB_NAME = 'harcher'
@@ -86,6 +86,7 @@ for record in competition_records:
 # Insert competition details into the database
 insert_query = "INSERT INTO CompetitionDetails (CompetitionID, RoundID, AgeGroup, Gender, Equipment) VALUES (%s, %s, %s, %s, %s)"
 cursor.executemany(insert_query, competition_details)
+
 connection.commit()
 
 

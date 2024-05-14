@@ -4,7 +4,7 @@ from collections import defaultdict
 import random
 
 # Database connection details
-DB_HOST = 'localhost'
+DB_HOST = '127.0.0.1'
 DB_USER = 'root'
 DB_PASS = 'password'
 DB_NAME = 'harcher'

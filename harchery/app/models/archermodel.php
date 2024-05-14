@@ -127,22 +127,28 @@ class archermodel extends model
 
         $this->db->beginTransaction();
 
+        $roundRecordIDS = [];
+
         foreach ($ranges as $record) {
             $range = $record['Range'];
-            $roundID = $this->roundNameAndRangeToID($roundName, $range);
-            $round_record_insert = [
-                '`Date`' => $date,
-                '`RoundID`' => $roundID,
-                'Equipment' => $division,
-                'ArcherID' => $archerID,
-            ];
-            $this->createRow('RoundRecord', $round_record_insert);
-            $roundRecordID = $this->db->getLastInsertID();
+            if (!array_key_exists($range, $roundRecordIDS)) {
+                $roundID = $this->roundNameAndRangeToID($roundName, $range);
+                $round_record_insert = [
+                    '`Date`' => $date,
+                    '`RoundID`' => $roundID,
+                    'Equipment' => $division,
+                    'ArcherID' => $archerID,
+                ];
+                $this->createRow('RoundRecord', $round_record_insert);
+                $roundRecordID = $this->db->getLastInsertID();
+                $roundRecordIDS[$range] =  $roundRecordID;
+            }
             $scores = explode(',', $record['Scores']);
             foreach ($scores as $index => $score) {
+                $rrid = $roundRecordIDS[$range];
                 $this->createRow(
                 "Arrow", [
-                    'RoundRecordID' => $roundRecordID, 
+                    'RoundRecordID' => $rrid, 
                     "PertainingEnd" => $index + 1, 
                     'Score' => $score, 
                 ]);
@@ -164,22 +170,28 @@ class archermodel extends model
 
         $this->db->beginTransaction();
 
+        $roundRecordIDS = [];
+
         foreach ($ranges as $record) {
             $range = $record['Range'];
-            $roundID = $this->roundNameAndRangeToID($roundName, $range);
-            $round_record_insert = [
-                '`Date`' => $date,
-                '`RoundID`' => $roundID,
-                'Equipment' => $division,
-                'ArcherID' => $archerID,
-            ];
-            $this->createRow('RoundRecord', $round_record_insert);
-            $roundRecordID = $this->db->getLastInsertID();
+            if (!array_key_exists($range, $roundRecordIDS)) {
+                $roundID = $this->roundNameAndRangeToID($roundName, $range);
+                $round_record_insert = [
+                    '`Date`' => $date,
+                    '`RoundID`' => $roundID,
+                    'Equipment' => $division,
+                    'ArcherID' => $archerID,
+                ];
+                $this->createRow('RoundRecord', $round_record_insert);
+                $roundRecordID = $this->db->getLastInsertID();
+                $roundRecordIDS[$range] =  $roundRecordID;
+            }
             $scores = explode(',', $record['Scores']);
             foreach ($scores as $index => $score) {
+                $rrid = $roundRecordIDS[$range];
                 $this->createRow(
                 "Arrow", [
-                    'RoundRecordID' => $roundRecordID, 
+                    'RoundRecordID' => $rrid, 
                     "PertainingEnd" => $index + 1, 
                     'Score' => $score, 
                 ]);

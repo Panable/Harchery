@@ -27,6 +27,7 @@ fake_arrow='fake_arrow_data.sql'
 fake_competition='fake_competition.sql'
 fake_championship='fake_championship.sql'
 fake_competition_record='fake_competitionrecord.sql'
+fake_competition_details='fake_competition_details.sql'
 
 # Fake
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_round_record}
@@ -34,4 +35,5 @@ docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < $
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition}
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_championship}
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition_record}
+docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition_details}
 cd ..

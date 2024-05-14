@@ -39,6 +39,29 @@ class database
         }
     }
 
+    public function rollback()
+    {
+        $this->dbh->rollBack();
+        $this->dbh->setAttribute(PDO::ATTR_AUTOCOMMIT, 1);
+    }
+
+    public function commit()
+    {
+        $this->dbh->commit();
+        $this->dbh->setAttribute(PDO::ATTR_AUTOCOMMIT, 1);
+    }
+
+    public function beginTransaction()
+    {
+        $this->dbh->setAttribute(PDO::ATTR_AUTOCOMMIT, 0);
+        $this->dbh->beginTransaction();
+    }
+
+    public function inTransaction()
+    {
+        return $this->dbh->inTransaction();
+    }
+
     // Method to retrieve the last inserted ID
     public function getLastInsertID()
     {

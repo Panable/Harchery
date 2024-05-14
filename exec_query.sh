@@ -22,13 +22,16 @@ docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < $
 cd PythonScripts
 
 for f in *.py; do python "$f"; done
-fake_competition='fake_Competition.sql'
-fake_arrow='fake_arrow_data.sql'
-fake_championship='fake_championship.sql'
 fake_round_record='fake_round_records.sql'
+fake_arrow='fake_arrow_data.sql'
+fake_competition='fake_competition.sql'
+fake_championship='fake_championship.sql'
+fake_competition_record='fake_competitionrecord.sql'
+
 # Fake
-docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition}
-docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_arrow}
-docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_championship}
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_round_record}
+docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_arrow}
+docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition}
+docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_championship}
+docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition_record}
 cd ..

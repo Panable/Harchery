@@ -125,6 +125,8 @@ class archermodel extends model
         $date = $data['Date'];
         $roundName = $data['RoundName'];
 
+        $this->db->beginTransaction();
+
         foreach ($ranges as $record) {
             $range = $record['Range'];
             $roundID = $this->roundNameAndRangeToID($roundName, $range);
@@ -150,6 +152,7 @@ class archermodel extends model
                 'RoundRecordID' => $roundRecordID, 
             ]);
         }
+        $this->db->commit();
     }
 
     function enterScore($data) {
@@ -158,6 +161,8 @@ class archermodel extends model
         $ranges = $data['Ranges'];
         $date = $data['Date'];
         $roundName = $data['RoundName'];
+
+        $this->db->beginTransaction();
 
         foreach ($ranges as $record) {
             $range = $record['Range'];
@@ -180,5 +185,6 @@ class archermodel extends model
                 ]);
             }
         }
+        $this->db->commit();
     }
 }

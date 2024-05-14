@@ -62,37 +62,35 @@ def generate_round_records(num_records, archer_data):
         # Generate a single date for all archers in the club
         if club_id not in last_date_by_club:
             archer_dob = fake.date_time_between(start_date='-90y', end_date='-10y')
-            start_date = max(datetime(1980, 1, 1), archer_dob + timedelta(days=365 * 10))
+            start_date = max(datetime(1990, 1, 1), archer_dob + timedelta(days=365 * 10))
             end_date = min(datetime.today() - timedelta(days=365 * 10), datetime.now())
 
             if start_date <= end_date:
-                last_date_by_club[club_id] = start_date + timedelta(days=random.randint(0, (end_date - start_date).days))
+                last_date_by_club[club_id] = start_date + timedelta(
+                    days=random.randint(0, (end_date - start_date).days))
             else:
                 last_date_by_club[club_id] = start_date
 
         last_date = last_date_by_club[club_id]
 
         for archer_id in archer_ids:
-            archer_round_generated = False  # Flag to track if at least one round record is generated for the archer
-            while not archer_round_generated:
-                archer_dob = fake.date_time_between(start_date='-90y', end_date='-10y')
-                age = calculate_age(archer_dob)
-                if age >= 10 and age <= 90:
-                    round_group = random.choice(Rounds)  # Randomly select a round format from Rounds
-                    equipment = random.choice(equipment_options)  # Randomly select equipment for the archer
-                    for round_id in round_group:
-                        # Increment time by 2 minutes for each round
-                        last_date += timedelta(minutes=2)
-                        # Check if the time is within the range of 8AM to 7PM
-                        if last_date.hour < 8:
-                            last_date = last_date.replace(hour=8, minute=0, second=0)
-                        elif last_date.hour >= 19:
-                            last_date = last_date.replace(hour=19, minute=0, second=0)
-                            # Move to the next day if the time exceeds 7PM
-                            last_date += timedelta(days=1)
-                        # Append round record for the archer with generated data
-                        round_records.append((last_date.strftime('%Y-%m-%d %H:%M:%S'), round_id, equipment, archer_id))
-                        archer_round_generated = True  # Set flag to indicate that a round record is generated for the archer
+            archer_dob = fake.date_time_between(start_date='-90y', end_date='-10y')
+            age = calculate_age(archer_dob)
+            if age >= 10 and age <= 90:
+                round_group = random.choice(Rounds)  # Randomly select a round format from Rounds
+                equipment = random.choice(equipment_options)  # Randomly select equipment for the archer
+
+                # Increment time by 2 to 4 minutes per archer
+                last_date += timedelta(minutes=random.randint(2, 4))
+
+                for round_id in round_group:
+                    # Check if the time is within the range of 8AM to 7PM
+                    if last_date.hour < 8:
+                        last_date = last_date.replace(hour=8, minute=0, second=0)
+                    elif last_date.hour >= 19:
+                        last_date = last_date.replace(hour=19, minute=0, second=0)
+                    # Append round record for the archer with generated data
+                    round_records.append((last_date.strftime('%Y-%m-%d %H:%M:%S'), round_id, equipment, archer_id))
     return round_records
 
 

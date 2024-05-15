@@ -53,7 +53,7 @@ def calculate_age(born):
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
 
-# Function to generate round records for archers
+# Function to generate round records for archers within the time range of 8AM to 7PM
 def generate_round_records(num_records, archer_data):
     round_records = []
     last_date_by_club = {}  # Dictionary to store the last generated date for each club
@@ -62,39 +62,41 @@ def generate_round_records(num_records, archer_data):
         # Generate a single date for all archers in the club
         if club_id not in last_date_by_club:
             archer_dob = fake.date_time_between(start_date='-90y', end_date='-10y')
-            start_date = max(datetime(1980, 1, 1), archer_dob + timedelta(days=365 * 10))
+            start_date = max(datetime(1990, 1, 1), archer_dob + timedelta(days=365 * 10))
             end_date = min(datetime.today() - timedelta(days=365 * 10), datetime.now())
 
             if start_date <= end_date:
-                last_date_by_club[club_id] = start_date + timedelta(days=random.randint(0, (end_date - start_date).days))
+                last_date_by_club[club_id] = start_date + timedelta(
+                    days=random.randint(0, (end_date - start_date).days))
             else:
                 last_date_by_club[club_id] = start_date
 
         last_date = last_date_by_club[club_id]
 
         for archer_id in archer_ids:
-            archer_round_generated = False  # Flag to track if at least one round record is generated for the archer
-            while not archer_round_generated:
-                archer_dob = fake.date_time_between(start_date='-90y', end_date='-10y')
-                age = calculate_age(archer_dob)
-                if age >= 10 and age <= 90:
-                    round_group = random.choice(Rounds)  # Randomly select a round format from Rounds
-                    equipment = random.choice(equipment_options)  # Randomly select equipment for the archer
-                    for round_id in round_group:
-                        # Append round record for the archer with generated data
-                        round_records.append((last_date.strftime('%Y-%m-%d'), round_id, equipment, archer_id))
-                        archer_round_generated = True  # Set flag to indicate that a round record is generated for the archer
+            archer_dob = fake.date_time_between(start_date='-90y', end_date='-10y')
+            age = calculate_age(archer_dob)
+            if age >= 10 and age <= 90:
+                round_group = random.choice(Rounds)  # Randomly select a round format from Rounds
+                equipment = random.choice(equipment_options)  # Randomly select equipment for the archer
 
-            # Update last date after generating rounds for the archer
-            if last_date:
-                last_date_by_club[club_id] = last_date + timedelta(
-                    days=random.randint(1, 7))  # Move to the next week for the next round
+                # Increment time by 2 to 4 minutes per archer
+                last_date += timedelta(minutes=random.randint(2, 4))
+
+                for round_id in round_group:
+                    # Check if the time is within the range of 8AM to 7PM
+                    if last_date.hour < 8:
+                        last_date = last_date.replace(hour=8, minute=0, second=0)
+                    elif last_date.hour >= 19:
+                        last_date = last_date.replace(hour=19, minute=0, second=0)
+                    # Append round record for the archer with generated data
+                    round_records.append((last_date.strftime('%Y-%m-%d %H:%M:%S'), round_id, equipment, archer_id))
     return round_records
 
 
 
 # Load archer data from CSV file
-archer_data = load_archer_data('fake_archer.csv')
+archer_data = load_archer_data('fake_Archer.csv')
 
 # Example: Generate RoundRecord data
 round_records_data = generate_round_records(200, archer_data)
@@ -103,14 +105,15 @@ round_records_data = generate_round_records(200, archer_data)
 # Function to write generated RoundRecord entries to SQL file
 def write_round_records_to_sql(file_path, round_records):
     with open(file_path, 'w') as sql_file:
+        sql_file.write("SET FOREIGN_KEY_CHECKS = 0;\n")
         sql_file.write("INSERT INTO RoundRecord (Date, RoundID, Equipment, ArcherID) VALUES\n")
-        for record in round_records:
-            sql_file.write(f"\t('{record[0]}', {record[1]}, '{record[2]}', {record[3]}),\n")
-        # Remove the trailing comma from the last entry
-        sql_file.seek(sql_file.tell() - 2, 0)
-        sql_file.truncate()
+        for idx, record in enumerate(round_records):
+            if idx == len(round_records) - 1:
+                sql_file.write(f"\t('{record[0]}', {record[1]}, '{record[2]}', {record[3]})\n")  # Write the last entry without a comma
+            else:
+                sql_file.write(f"\t('{record[0]}', {record[1]}, '{record[2]}', {record[3]}),\n")
         sql_file.write(";")
-
+        sql_file.write("SET FOREIGN_KEY_CHECKS = 1;")
 
 # Example: Write generated RoundRecord entries to SQL file
 write_round_records_to_sql('fake_round_records.sql', round_records_data)

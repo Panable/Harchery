@@ -7,5 +7,5 @@ define('DB_NAME', 'harcher');
 
 //App info
 define('APPROOT', dirname(dirname(__FILE__)));
-define('URLROOT', 'http://localhost/harchery/');
+define('URLROOT', 'http://112.141.183.121/harchery/');
 define('SITENAME', 'Harchery');

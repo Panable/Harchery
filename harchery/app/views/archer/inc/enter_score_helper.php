@@ -28,10 +28,10 @@ function prompt_score($data)
     $encoded_name = encode_name($encoded_name);
 
     $root = URLROOT;
-    $html = "<h1>Stage your score.</h1>\n
+    $html = "<h1>Enter your score.</h1>\n
              <br>
              <h3>{$data['Round'][0]->Name}</h3>
-             <form action=\"{$root}archer/stageScore/$encoded_name\" method=\"post\">
+             <form action=\"{$root}archer/enterScore/$encoded_name\" method=\"post\">
                  <table class=\"table table-bordered table-dark\">\n
                      {$head}
                      {$rows}
@@ -41,7 +41,7 @@ function prompt_score($data)
                  <input type=\"datetime-local\"  name=\"Date\" value=\"{$date}\">
                  <input type=\"hidden\" id=\"ArcherID\" name=\"ArcherID\" value=\"{$data['ArcherID']}\">
                  <input type=\"hidden\" id=\"RoundName\" name=\"RName\" value=\"{$encoded_name}\">
-                 <button type=\"submit\" class=\"btn btn-primary\">Stage</button>
+                 <button type=\"submit\" class=\"btn btn-primary\">Enter</button>
               </form>";
     echo $html;
 }
@@ -92,7 +92,7 @@ function genTableRows($data)
             $html .= "<td>
                           <input type=\"hidden\" id=\"Range\" name=\"Ranges[{$normalized_index}][Range]\" value=\"{$round->Range}\">
                           <input type=\"hidden\" id=\"Range\" name=\"Ranges[{$normalized_index}][End]\" value=\"{$i}\">
-                          <input name=\"Ranges[{$normalized_index}][Scores]\" type=\"text\" id=\"numbersInput\" placeholder=\"e.g., 1,2,3,4,5,6\">
+                          <input name=\"Ranges[{$normalized_index}][Scores]\" type=\"text\" id=\"numbersInput\" placeholder=\"e.g., 1,2,3,4,5,6\" value=\"1,2,3,4,5,6\">
                       </td>";
         }
         $html .= "</tr>\n";
@@ -101,7 +101,6 @@ function genTableRows($data)
     return $html;
 }
 
-// call stage score with post to regenerate new view
 function prompt_round($data)
 {
     $select = '';
@@ -112,7 +111,7 @@ function prompt_round($data)
     $root = URLROOT;
 
     $html ="<h1 class=\"card-text\">Select the Round you are playing.</h1>
-            <form action=\"{$root}archer/stageScore/-1\" method=\"post\">
+            <form action=\"{$root}archer/enterScore/-1\" method=\"post\">
                 <div class=\"mb-3\">
                     <label for=\"RoundName\">Round Name:</label>
                     <select class=\"form-select\" id=\"RoundName\" name=\"RoundName\">'

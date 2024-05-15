@@ -12,7 +12,7 @@
                 <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewChampionshipResults>3. View Championship result</a><br>
                 <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewRounds>4. View round definitions</a><br>
                 <a class="link-secondary" href=<?php echo URLROOT; ?>archer/stageScore/-1>5. Stage a new score</a><br>
-                
+                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/enterScore/-1>6. Enter a new score</a><br>
             </div>
         </div>
     </main>

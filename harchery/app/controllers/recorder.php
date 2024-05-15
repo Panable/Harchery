@@ -27,6 +27,30 @@ class recorder extends controller
         
     }
 
+    private function postRequestViewStaging()
+    {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $data = $_POST;
+        $status = "";
+        
+        try {
+            if (isset($_POST['accept'])) {
+                $roundIDs = $data['accept'];
+                $status = "ACCEPTED";
+                $this->model->acceptStagedScore($roundIDs);
+            } else if (isset($_POST['deny'])) {
+                $roundIDs = $data['deny'];
+                $status = "DENIED";
+                $this->model->denyStagedScore($roundIDs);
+            } else {
+                throw new Exception("Error Processing Request", 1);
+            }
+            status_msg("You have successfully $status this request to stage.");
+        } catch (Exception $e) {
+            status_msg("FAILED TO MODIFY STAGING $e");
+        }
+    }
+
     private function postRequestArcherCreate()
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -140,10 +164,15 @@ class recorder extends controller
     public function viewStaging()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->postRequestRoundCreate();
+            $this->postRequestViewStaging();
             return;
         }
+        $club_id = getSession("UserID");
 
-        $this->view('recorder/view_staging');
+        $staged_scores = $this->model->viewStagedScores($club_id);
+        $data = [
+            'staged' => $staged_scores,
+        ];
+        $this->view('recorder/view_staging', $data);
     }
 }

@@ -112,7 +112,9 @@ class model
 
         // Construct the SQL query for insertion
         $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
-
+        $wasInTransaction = $this->db->inTransaction();
+        if (!$wasInTransaction)
+            $this->db->beginTransaction();
         try {
             // Set the query in the database handler
             $this->db->query($sql);
@@ -128,9 +130,12 @@ class model
 
             // Check if a row was inserted (success)
         } catch (PDOException $e) {
+            $this->db->rollback();
             // Catch and throw an exception for any database errors
             throw new Exception("Database error: " . $e->getMessage());
         }
+        if (!$wasInTransaction)
+            $this->db->commit();
     }
 
     // Method to edit an existing row in a specified table with provided data

@@ -60,6 +60,7 @@ class recordermodel extends model
 
     function createCompetition($data) {
 
+        $this->db->beginTransaction();
         // Create Competition Table Record.
         $competitionName = $data['CompetitionName'];
         try {
@@ -93,6 +94,8 @@ class recordermodel extends model
                 }
             }
         }
+
+        $this->db->commit();
         return $competitionID;
     }
 
@@ -101,13 +104,16 @@ class recordermodel extends model
         try {
             $this->disableForeignKeyChecks();
             $competitionID = $this->createCompetition($data);
+            $this->db->beginTransaction();
             $clubID = $data['ClubID'];
             $this->createRow('Championship', ['ClubID' => $clubID, 'CompetitionID' => $competitionID]);
             $this->enableForeignKeyChecks();
         } catch (PDOException $e) {
             $this->enableForeignKeyChecks();
+            $this->db->rollback();
             throw new Exception("Database error: " . $e->getMessage());
         }
+        $this->db->commit();
     }
 
     function createRound($data) {
@@ -117,6 +123,7 @@ class recordermodel extends model
             $totalEnds = $round['ends'];
             $face = $round['face'];
 
+            $this->db->beginTransaction();
             try {
                 $sqltest = "INSERT INTO `Round` (Name, `Range`, TotalEnds, Face) VALUES (:Name, :`Range`, :TotalEnds, :Face)";
 
@@ -128,9 +135,10 @@ class recordermodel extends model
                     'Face' => $face,
                 ]);
             } catch (PDOException $e) {
+                $this->db->rollback();
                 throw new Exception("Database error: " . e->getMessage());
             }
-
+            $this->db->commit();
         }
     }
 
@@ -143,8 +151,56 @@ class recordermodel extends model
             $this->db->bind(':name', $name);
             return $data = $this->db->resultColumn();
         } catch (PDOException $e) {
+            $this->db->rollback();
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
 
+    function viewStagedScores($club_id)
+    {
+        $sql = "SELECT * FROM StagedRounds WHERE ClubID=:clubID";
+
+        try {
+            $this->db->query($sql);
+            $this->db->bind(':clubID', $club_id);
+            return $data = $this->db->resultSet();
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    function acceptStagedScore($stageData)
+    {
+        // where stagedata = 
+        $sql = "DELETE FROM Staging WHERE RoundRecordID IN ($stageData)";
+        try {
+            $this->db->beginTransaction();
+            $this->db->query($sql);
+            $this->db->execute();
+        } catch (PDOException $e) {
+            $this->db->rollback();
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+        $this->db->commit();
+    }
+
+    function denyStagedScore($stageData)
+    {
+        try {
+            $this->db->beginTransaction();
+            $sql = "DELETE FROM Staging WHERE RoundRecordID IN ($stageData)";
+            $this->db->query($sql);
+            $this->db->execute();
+            $sql = "DELETE FROM Arrow WHERE RoundRecordID IN ($stageData)";
+            $this->db->query($sql);
+            $this->db->execute();
+            $sql = "DELETE FROM RoundRecord WHERE ID IN ($stageData)";
+            $this->db->query($sql);
+            $this->db->execute();
+        } catch (PDOException $e) {
+            $this->db->rollback();
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+        $this->db->commit();
+    }
 }

@@ -38,6 +38,6 @@ python GenChampionship.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_championship}
 python GenCompetitionRecord.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition_record}
-python GenCompetitonDetail.py
+python GenCompetitionDetail.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition_details}
 cd ..

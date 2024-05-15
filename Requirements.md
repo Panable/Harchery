@@ -23,14 +23,14 @@
 - [x] Archers have to be able to look up definitions of rounds, i.e. what ranges make up the round.
 > List all 'round' 
 
-- [ ] Archers want to look up club competition results and see how everyone has placed and who shot what score.
+- [x] Archers want to look up club competition results and see how everyone has placed and who shot what score.
 
 > Have page of championships held in club. championship table to match specific clubid
 > When click on specific championship, show all results (passing competitionid)
 > To show all results, use competitionid to get all competition records linking with round record and archer (tallying up their score like above)
 
 
-- [ ] The participating rounds and scores have to be defined so that the results can be shown and the winners identified.
+- [x] The participating rounds and scores have to be defined so that the results can be shown and the winners identified.
 > Just a database requirement. already done.
 
 - [ ] Determining an archer’s best score for a round

@@ -38,22 +38,53 @@ class archer extends controller
         ];
         $this->view('archer/index', $data);
     }
-
-    public function viewScore()
-    {
-        if (!getSession('UserID') || getSession('UserType') != 'Archer')
+    
+    public function viewScore() {
+    try {
+        // Check if the user is an archer
+        if (!getSession('UserID') || getSession('UserType') != 'Archer') {
             status_msg("You are... uh not an archer?");
+            return; // Exit the method if the user is not an archer
+        }
 
-        $archer_id = getSession('UserID');
-        $scores = $this->model->getScores($archer_id);
-        
+        // Get the archer ID
+        $archer_id = getSession('UserID'); 
 
+        // Retrieve form data from POST
+        $formData = $_POST;
+
+        // Prepare array to store filter conditions
+        $filters = [];
+
+        // Loop through form data to extract filter conditions
+        foreach ($formData as $key => $value) {
+            // Check if the field starts with 'clause_'
+            if (strpos($key, 'clause_') === 0 && !empty($value)) {
+                // Extract the condition name from the key
+                $conditionName = substr($key, strlen('clause_'));
+
+                // Remove the 'clause_' prefix and store the condition in the filters array
+                $filters[$conditionName] = $value;
+            }
+        }
+
+        // Call the getScores method with archer ID and filter conditions
+        $scores = $this->model->getScores($archer_id, $filters);
+        $baseScores = $this->model->getBaseScores($archer_id);
+
+
+        // Pass scores to the view
         $data = [
             'Scores' => $scores,
+            'BaseScores' => $baseScores,
         ];
 
         $this->view('archer/view_score', $data);
+    } catch (Exception $e) {
+        // Handle exceptions
+        echo "Error: " . $e->getMessage();
     }
+}
 
     public function viewRounds() 
     {

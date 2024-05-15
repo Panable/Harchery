@@ -89,18 +89,75 @@ class archermodel extends model
         return $processed_rounds;
     }
 
-    function getScores($archerID) {
-        try {
-            $score_sql = "SELECT * FROM ArcherRoundScores WHERE ArcherID=:archerID";
+function getBaseScores($archerID) {
+    try {
+       
+        // Database query
+        $score_sql = "SELECT * FROM ArcherRoundScores WHERE ArcherID=:archerID";
 
+        // Executes query
         $this->db->query($score_sql);
+
+        // Bind archerID parameter
         $this->db->bind(":archerID", $archerID);
+
+        // dw this is just for the MVC
         $data = $this->db->resultSet();
+
+        // returns query output
         return $data;
-        } catch (PDOException $e) {
-            throw new Exception("Database error: " . $e->getMessage());
-        }
+    } catch (PDOException $e) {
+        // Displays error if present
+        throw new Exception("Database error: " . $e->getMessage());
     }
+}
+    
+function getScores($archerID, $formData) {
+    try {
+       
+        // Database query
+        $score_sql = "SELECT * FROM ArcherRoundScores WHERE ArcherID=:archerID";
+
+        // Get additional conditions from form data
+        $clauses = $this->prepareClauses($formData);
+
+        // Append the additional conditions to the SQL query
+        if (!empty($clauses)) {
+            $score_sql .= " AND " . implode(" AND ", $clauses);
+        }
+
+        // Executes query
+        $this->db->query($score_sql);
+
+        // Bind archerID parameter
+        $this->db->bind(":archerID", $archerID);
+
+        // Bind additional parameters from formData
+        foreach ($formData as $key => $value) {
+            $this->db->bind(":" . $key, $value);
+        }
+
+        // dw this is just for the MVC
+        $data = $this->db->resultSet();
+        // returns query output
+        return $data;
+    } catch (PDOException $e) {
+        // Displays error if present
+        throw new Exception("Database error: " . $e->getMessage());
+    }
+}
+
+   function prepareClauses($formData) {
+    $additionalClauses = [];
+
+    // Loop through the form data to parse associative clauses
+    foreach ($formData as $key => $value) {
+        // Add the condition to the additionalClauses array
+        $additionalClauses[] = "`$key` = :$key";
+    }
+
+    return $additionalClauses;
+}
 
     function roundNameAndRangeToID($name, $range)
     {
@@ -148,7 +205,7 @@ class archermodel extends model
             $this->createRow(
             "Staging", [
                 'RoundRecordID' => $roundRecordID, 
-            ]);
+             ]);
         }
     }
 }

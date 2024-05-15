@@ -3,55 +3,69 @@
 <?php require APPROOT . '/views/inc/navbar.php'; ?>
         <div class="card-body text-center overflow bg-dark text-white p-4 m-5 rounded-3">
         <?php echo "<h1>" . $data['Scores'][0]->ArcherName . "'s Record</h1>"; ?>
-            <form>
-                <label for="filterDate">Filter Date: </label>
-                <select class="form-select" name="filterDate" id="filterDate">
-                <?php 
-                // Extract unique years from dates
-                $years = array_values(array_unique(array_column($data['Scores'], 'Date')));
+
             
-                // Output options for each unique year
-                foreach($years as $date) {
-                    echo "<option>" . $date . "</option>"; 
-                } ?>
-                </select>
 
-                <label for="filterRange">Filter Range: </label>
-                <select class="form-select" name="filterRange" id="filterRange">
-                    <?php 
-                    // Extract unique RoundRanges
-                    $ranges = array_values(array_unique(array_column($data['Scores'], 'RoundRange')));
 
-                    // Output options for each unique RoundRange
-                    foreach($ranges as $range) {
-                        echo "<option>" . $range . "</option>"; 
-                    } ?>
-                </select>
+<form method="post">
+    <label for="filterDate">Filter Date: </label>
+    <select class="form-select" name="clause_Date" id="filterDate">
+        <option value="">-- Select Date --</option> <!-- Blank option -->
+        <?php 
+        $dates = array_unique(array_map(function($row) {
+            return $row->Date;
+        }, $data['BaseScores']));
+        foreach($dates as $date) {
+            echo "<option>" . $date . "</option>"; 
+        }
+        ?>
+    </select>
 
-                <label for="filterRound">Filter Round: </label>
-                <select class="form-select" name="filterRound" id="filterRound">
-                    <?php 
-                    // Extract unique RoundNames
-                    $rounds = array_values(array_unique(array_column($data['Scores'], 'RoundName')));
+    <label for="filterRange">Filter Range: </label>
+    <select class="form-select" name="clause_RoundRange" id="filterRange">
+        <option value="">-- Select Range --</option> <!-- Blank option -->
+        <?php 
+        $ranges = array_unique(array_map(function($row) {
+            return $row->RoundRange;
+        }, $data['BaseScores']));
+        foreach($ranges as $range) {
+            echo "<option>" . $range . "</option>"; 
+        }
+        ?>
+    </select>
 
-                    // Output options for each unique RoundName
-                    foreach($rounds as $round) {
-                        echo "<option>" . $round . "</option>"; 
-                    } ?>
-                </select>
-                    
-                <label for="sortDate">Sort Date: </label>
-                <select class="form-select" name="sortDate" id="sortDate">
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
-                </select>
+    <label for="filterRound">Filter Round: </label>
+    <select class="form-select" name="clause_RoundName" id="filterRound">
+        <option value="">-- Select Round --</option> <!-- Blank option -->
+        <?php 
+        $rounds = array_unique(array_map(function($row) {
+            return $row->RoundName;
+        }, $data['BaseScores']));
+        foreach($rounds as $round) {
+            echo "<option>" . $round . "</option>"; 
+        }
+        ?>
+    </select>
 
-                <label for="sortScore">Sort Score: </label>
-                <select class="form-select" name="sortScore" id="sortScore">
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
-                </select>
-            </form>
+    <label for="sortDate">Sort Date: </label>
+    <select class="form-select" name="sortDate" id="sortDate">
+        <option value="">-- Select Sort Date --</option> <!-- Blank option -->
+        <option>ASC</option>
+        <option>DESC</option>
+
+    </select>
+
+    <label for="sortScore">Sort Score: </label>
+    <select class="form-select" name="sortScore" id="sortScore">
+        <option value="">-- Select Sort Score --</option> <!-- Blank option -->
+        <option>ASC</option>
+        <option>DESC</option>
+    </select>
+
+    <button type="submit">Submit</button>
+</form>
+
+
 
             <table class="table table-bordered table-dark">
                 <thead>
@@ -74,6 +88,7 @@
                 </tbody>
             </table>
         </div>
+
 <?php require APPROOT . '/views/inc/footer.php'; ?>
 <?php require APPROOT . '/views/inc/ender.php'; ?>
 

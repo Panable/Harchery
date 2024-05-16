@@ -52,7 +52,7 @@
             WHERE 
                 CR.CompetitionID = $competition_id
             GROUP BY 
-                CONCAT(A.FirstName, ' ', A.LastName)";
+                A.ID";
             
             
                 $archers_result = mysqli_query($conn, $query);

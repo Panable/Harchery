@@ -28,16 +28,16 @@ fake_championship='fake_championship.sql'
 fake_competition_record='fake_competitionrecord.sql'
 fake_competition_details='fake_competition_details.sql'
 
-python GenRoundRecord.py
+python3 GenRoundRecord.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_round_record}
-python GenArrow.py
+python3 GenArrow.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_arrow}
-python GenCompetition.py
+python3 GenCompetition.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition}
-python GenChampionship.py
+python3 GenChampionship.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_championship}
-python GenCompetitionRecord.py
+python3 GenCompetitionRecord.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition_record}
-python GenCompetitionDetail.py
+python3 GenCompetitionDetail.py
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${fake_competition_details}
 cd ..

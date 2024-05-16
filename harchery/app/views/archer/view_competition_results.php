@@ -47,6 +47,7 @@
                 GROUP BY
                     C.ID, A.ID";
 
+
                     
             $results = mysqli_query($conn, $query);
             if (mysqli_num_rows($results) > 0) {

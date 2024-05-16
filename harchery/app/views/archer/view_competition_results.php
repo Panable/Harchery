@@ -26,44 +26,26 @@
             $searchTerm = mysqli_real_escape_string($conn, $_GET['competition_name']);  //checks input and escapes unwanted characters preventing sql injection.
             mysqli_real_escape_string($conn, $searchTerm);
 
-        // $query = "SELECT 
-        //     C.ID AS CompetitionID,
-        //     C.Name AS CompetitionName,
-        //     CONCAT(A.FirstName, ' ', A.LastName) AS ArcherFullName,
-        //     SUM(Arr.Score) AS ArcherScore
-        // FROM 
-        //     Competition AS C
-        // INNER JOIN CompetitionDetails AS CD ON C.ID = CD.CompetitionID
-        // INNER JOIN RoundRecord AS RR ON CD.RoundID = RR.RoundID
-        // INNER JOIN Archer AS A ON RR.ArcherID = A.ID
-        // LEFT JOIN Arrow AS Arr ON RR.ID = Arr.RoundRecordID
-        // LEFT JOIN Staging AS S ON RR.ID = S.RoundRecordID
-        // WHERE 
-        //     C.Name LIKE '%$searchTerm%'
-        //     AND S.RoundRecordID IS NULL
-        // GROUP BY 
-        //     C.ID,
-        //     C.Name,
-        //     ArcherFullName";
+
         $query = "SELECT 
-    C.ID AS CompetitionID,
-    C.Name AS CompetitionName,
-    CONCAT(A.FirstName, ' ', A.LastName) AS ArcherFullName,
-    SUM(Ar.Score) AS ArcherScore
-FROM 
-    Competition C
-JOIN 
-    CompetitionRecord CR ON C.ID = CR.CompetitionID
-JOIN 
-    RoundRecord RR ON CR.RoundRecordID = RR.ID
-JOIN 
-    Archer A ON RR.ArcherID = A.ID
-JOIN 
-    Arrow Ar ON RR.ID = Ar.RoundRecordID
-WHERE 
-    C.Name LIKE '%$searchTerm%' -- Replace 'YourCompetitionName' with the competition name you want to search
-GROUP BY 
-    C.ID, A.ID";
+                    C.ID AS CompetitionID,
+                    C.Name AS CompetitionName,
+                    CONCAT(A.FirstName, ' ', A.LastName) AS ArcherFullName,
+                    SUM(Ar.Score) AS ArcherScore
+                FROM 
+                    Competition C
+                JOIN 
+                    CompetitionRecord CR ON C.ID = CR.CompetitionID
+                JOIN 
+                    RoundRecord RR ON CR.RoundRecordID = RR.ID
+                JOIN 
+                    Archer A ON RR.ArcherID = A.ID
+                JOIN 
+                    Arrow Ar ON RR.ID = Ar.RoundRecordID
+                WHERE 
+                    C.Name LIKE '%$searchTerm%'
+                GROUP BY
+                    C.ID, A.ID";
 
                     
             $results = mysqli_query($conn, $query);

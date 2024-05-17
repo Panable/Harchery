@@ -278,4 +278,46 @@ class archermodel extends model
         }
         $this->db->commit();
     }
+
+
+    public function getClubIDByArcherID($archerID) {
+        try {
+            $sql = "SELECT ClubID FROM Archer WHERE ID = :archerID";
+            $this->db->query($sql);
+            $this->db->bind(':archerID', $archerID);
+            $row = $this->db->single();
+            return $row ? $row->ClubID : null;
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    public function getClubTopScores($clubID, $limit = 10) {
+        try {
+            $score_sql = "SELECT ClubID, ClubName, RoundID, RoundName, ArcherID, ArcherName, TotalScore
+                          FROM ClubBestScores
+                          WHERE ClubID = :clubID
+                          ORDER BY TotalScore DESC
+                          LIMIT :limit";
+            $this->db->query($score_sql);
+            $this->db->bind(':clubID', $clubID);
+            $this->db->bind(':limit', $limit, PDO::PARAM_INT);
+            $data = $this->db->resultSet();
+            return $data;
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    public function getAllClubs() {
+        try {
+            $sql = "SELECT ID, Name, State FROM Club LIMIT 150";
+            $this->db->query($sql);
+            $data = $this->db->resultSet();
+            return $data;
+        } catch (PDOException $e) {
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
 }
+

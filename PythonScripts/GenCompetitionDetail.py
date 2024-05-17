@@ -82,12 +82,6 @@ for record in competition_records:
         for round_id_in_format in Rounds[current_format]:
             competition_details.append((competition_id, round_id_in_format, age_group, gender, equipment))
 
-# Insert competition details into the database
-insert_query = "INSERT INTO CompetitionDetails (CompetitionID, RoundID, AgeGroup, Gender, Equipment) VALUES (%s, %s, %s, %s, %s)"
-cursor.executemany(insert_query, competition_details)
-
-connection.commit()
-
 
 # Function to write competition details to an SQL file
 def write_competition_details_to_sql(file_path, competition_details):

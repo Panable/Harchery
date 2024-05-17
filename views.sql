@@ -126,3 +126,49 @@ ExpandedRounds AS (
 SELECT EquivalentName, EquivalentNames
 FROM ExpandedRounds
 ORDER BY EquivalentName, EquivalentNames;
+
+CREATE OR REPLACE VIEW ClubBestScores AS
+WITH ScoreSummary AS (
+    SELECT 
+        c.ID AS ClubID,
+        c.Name AS ClubName,
+        r.ID AS RoundID,
+        r.Name AS RoundName,
+        a.ID AS ArcherID,
+        CONCAT(a.FirstName, ' ', a.LastName) AS ArcherName,
+        SUM(ar.Score) AS TotalScore
+    FROM 
+        Club c
+    JOIN 
+        Archer a ON c.ID = a.ClubID
+    JOIN 
+        RoundRecord rr ON a.ID = rr.ArcherID
+    JOIN 
+        Arrow ar ON rr.ID = ar.RoundRecordID
+    JOIN 
+        `Round` r ON rr.RoundID = r.ID
+    GROUP BY 
+        c.ID, c.Name, r.ID, r.Name, a.ID, ArcherName
+),
+MaxScores AS (
+    SELECT 
+        ClubID,
+        RoundID,
+        MAX(TotalScore) AS MaxScore
+    FROM 
+        ScoreSummary
+    GROUP BY 
+        ClubID, RoundID
+)
+SELECT 
+    ss.ClubID,
+    ss.ClubName,
+    ss.RoundID,
+    ss.RoundName,
+    ss.ArcherID,
+    ss.ArcherName,
+    ss.TotalScore
+FROM 
+    ScoreSummary ss
+JOIN 
+    MaxScores ms ON ss.ClubID = ms.ClubID AND ss.RoundID = ms.RoundID AND ss.TotalScore = ms.MaxScore;

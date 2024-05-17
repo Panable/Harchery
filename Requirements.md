@@ -36,7 +36,7 @@
 - [x] Determining an archer’s best score for a round
 > Show all round records of an archer, filter unique highest scores for RoundID
 
-- [ ] The club’s best score for a round and the archer who shot it should also be an available lookup.
+- [x] The club’s best score for a round and the archer who shot it should also be an available lookup.
 > Like first requirement, but this time filter by club and sort by highest
 
 

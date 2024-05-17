@@ -11,7 +11,7 @@ database='harcher'
 
 
 # SQL file
-sql_file='test_query.sql'
+sql_file='views.sql'
 
 # Execute SQL file
 docker exec -i ${service_name} mysql -u${username} -p${password} ${database} < ${sql_file}

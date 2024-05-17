@@ -98,6 +98,7 @@ CREATE TABLE CompetitionRecord (
 CREATE TABLE Championship (
     ClubID INT NOT NULL,
     CompetitionID INT NOT NULL,
+    UNIQUE(ClubID, CompetitionID),
     FOREIGN KEY (ClubID) REFERENCES Club(ID),
     FOREIGN KEY (CompetitionID) REFERENCES Competition(ID)
 );

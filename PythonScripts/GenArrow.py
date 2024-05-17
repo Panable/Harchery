@@ -42,12 +42,7 @@ def generate_fake_arrow_data(cursor):
 
     return data
 
-
 data = generate_fake_arrow_data(cursor)
-cursor.executemany("INSERT INTO Arrow (RoundRecordID, PertainingEnd, Score) VALUES (%s, %s, %s)", data)
-connection.commit()
-print(f"{len(data)} rows inserted successfully into the Arrow table.")
-
 
 def generate_sql_file(data, filename):
     with open(filename, 'w') as f:

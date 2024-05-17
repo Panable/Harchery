@@ -40,9 +40,6 @@ def write_sql_commands_to_file_and_insert(file_path):
     with open(file_path, 'w') as file:
         for command in sql_commands:
             file.write("INSERT INTO CompetitionRecord (RoundRecordID, CompetitionID) VALUES ({}, {});\n".format(command[0], command[1]))
-            # Insert into the database
-            insert_query = "INSERT INTO CompetitionRecord (RoundRecordID, CompetitionID) VALUES (%s, %s)"
-            cursor.execute(insert_query, command)
 
     # Commit the changes to the database
     connection.commit()

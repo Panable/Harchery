@@ -89,63 +89,73 @@ class archermodel extends model
         return $processed_rounds;
     }
 
-function getBaseScores($archerID) {
-    try {
-       
-        // Database query
-        $score_sql = "SELECT * FROM ArcherRoundScores WHERE ArcherID=:archerID";
+    function getBaseScores($archerID) {
+        try {
+           
+            // Database query
+            $score_sql = "SELECT * FROM ArcherRoundScores WHERE ArcherID=:archerID";
 
-        // Executes query
-        $this->db->query($score_sql);
+            // Executes query
+            $this->db->query($score_sql);
 
-        // Bind archerID parameter
-        $this->db->bind(":archerID", $archerID);
+            // Bind archerID parameter
+            $this->db->bind(":archerID", $archerID);
 
-        // dw this is just for the MVC
-        $data = $this->db->resultSet();
+            // dw this is just for the MVC
+            $data = $this->db->resultSet();
 
-        // returns query output
-        return $data;
-    } catch (PDOException $e) {
-        // Displays error if present
-        throw new Exception("Database error: " . $e->getMessage());
+            // returns query output
+            return $data;
+        } catch (PDOException $e) {
+            // Displays error if present
+            throw new Exception("Database error: " . $e->getMessage());
+        }
     }
-}
     
-function getScores($archerID, $formData) {
-    try {
-       
-        // Database query
-        $score_sql = "SELECT * FROM ArcherRoundScores WHERE ArcherID=:archerID";
 
-        // Get additional conditions from form data
-        $clauses = $this->prepareClauses($formData);
+    function getScores($archerID, $formData, $sortOptions = []) {
+        try {
+            // Database query
+            $score_sql = "SELECT * FROM ArcherRoundScores WHERE ArcherID=:archerID";
 
-        // Append the additional conditions to the SQL query
-        if (!empty($clauses)) {
-            $score_sql .= " AND " . implode(" AND ", $clauses);
+            // Get additional conditions from form data
+            $clauses = $this->prepareClauses($formData);
+
+            // Append the additional conditions to the SQL query
+            if (!empty($clauses)) {
+                $score_sql .= " AND " . implode(" AND ", $clauses);
+            }
+
+            // Add sorting options to the SQL query
+            if (!empty($sortOptions)) {
+                $orderByClauses = [];
+                foreach ($sortOptions as $field => $direction) {
+                    $orderByClauses[] = "$field $direction";
+                }
+                $score_sql .= " ORDER BY " . implode(", ", $orderByClauses);
+            }
+
+            // Executes query
+            $this->db->query($score_sql);
+
+            // Bind archerID parameter
+            $this->db->bind(":archerID", $archerID);
+
+            // Bind additional parameters from formData
+            foreach ($formData as $key => $value) {
+                $this->db->bind(":" . $key, $value);
+            }
+
+            // dw this is just for the MVC
+            $data = $this->db->resultSet();
+            // returns query output
+            return $data;
+        } catch (PDOException $e) {
+            // Displays error if present
+            throw new Exception("Database error: " . $e->getMessage());
         }
-
-        // Executes query
-        $this->db->query($score_sql);
-
-        // Bind archerID parameter
-        $this->db->bind(":archerID", $archerID);
-
-        // Bind additional parameters from formData
-        foreach ($formData as $key => $value) {
-            $this->db->bind(":" . $key, $value);
-        }
-
-        // dw this is just for the MVC
-        $data = $this->db->resultSet();
-        // returns query output
-        return $data;
-    } catch (PDOException $e) {
-        // Displays error if present
-        throw new Exception("Database error: " . $e->getMessage());
     }
-}
+
 
    function prepareClauses($formData) {
     $additionalClauses = [];

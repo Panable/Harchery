@@ -48,18 +48,18 @@
     </select>
 
     <label for="sortDate">Sort Date: </label>
-    <select class="form-select" name="sortDate" id="sortDate">
+    <select class="form-select" name="sort_Date" id="sortDate">
         <option value="">-- Select Sort Date --</option> <!-- Blank option -->
-        <option>ASC</option>
-        <option>DESC</option>
+        <option value="ASC">Ascending</option>
+        <option value="DESC">Descending</option>
 
     </select>
 
-    <label for="sortScore">Sort Score: </label>
-    <select class="form-select" name="sortScore" id="sortScore">
-        <option value="">-- Select Sort Score --</option> <!-- Blank option -->
-        <option>ASC</option>
-        <option>DESC</option>
+    <label for="sortTotalScore">Sort Score: </label>
+    <select class="form-select" name="sort_TotalScore" id="sortTotalScore">
+        <option value="">-- Select Sort Total Score --</option> <!-- Blank option -->
+        <option value="ASC">Ascending</option>
+        <option value="DESC">Descending</option>
     </select>
 
     <button type="submit">Submit</button>
@@ -91,8 +91,3 @@
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
 <?php require APPROOT . '/views/inc/ender.php'; ?>
-
-// TODO:
-// If User doesnt have any associtive data, error will present itself.
-// Filters apply via "APPLY" button
-// Sort should work on click | Toggle with selectable feild | Select \/ Toggle Asc/Desc

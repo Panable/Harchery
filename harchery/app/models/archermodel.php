@@ -2,8 +2,6 @@
 
 class archermodel extends model
 {
-
-
     function getRoundNames() {
         try {
             $rounds_sql = "SELECT Name From Round Group By Name";

@@ -50,16 +50,16 @@
     <label for="sortDate">Sort Date: </label>
     <select class="form-select" name="sort_Date" id="sortDate">
         <option value="">-- Select Sort Date --</option> <!-- Blank option -->
-        <option value="ASC">Ascending</option>
-        <option value="DESC">Descending</option>
+        <option value="ASC">Latest</option>
+        <option value="DESC">Oldest</option>
 
     </select>
 
     <label for="sortTotalScore">Sort Score: </label>
     <select class="form-select" name="sort_TotalScore" id="sortTotalScore">
         <option value="">-- Select Sort Total Score --</option> <!-- Blank option -->
-        <option value="ASC">Ascending</option>
-        <option value="DESC">Descending</option>
+        <option value="ASC">Lowest</option>
+        <option value="DESC">Highest</option>
     </select>
 
     <button type="submit">Submit</button>
@@ -88,6 +88,11 @@
                 </tbody>
             </table>
         </div>
+
+<!-- TODO:  -->
+<!--  - Add a no record view for error handelling (James Python script protects against this) -->
+<!--  - Style Submit button -->
+<!--  - Change Sort preview -->
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
 <?php require APPROOT . '/views/inc/ender.php'; ?>

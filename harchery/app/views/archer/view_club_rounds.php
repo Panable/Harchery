@@ -27,7 +27,6 @@
         <thead>
             <tr>
                 <th scope="col">Ranking</th>
-                <th scope="col">Club Name</th>
                 <th scope="col">Round Name</th>
                 <th scope="col">Archer Name</th>
                 <th scope="col">Total Score</th>
@@ -39,7 +38,6 @@
                 <?php foreach ($data['BestScores'] as $row): ?>
                     <tr>
                         <td><?php echo $rank++; ?></td>
-                        <td><?php echo htmlspecialchars($row->ClubName); ?></td>
                         <td><?php echo htmlspecialchars($row->RoundName); ?></td>
                         <td><?php echo htmlspecialchars($row->ArcherName); ?></td>
                         <td><?php echo htmlspecialchars($row->TotalScore); ?></td>

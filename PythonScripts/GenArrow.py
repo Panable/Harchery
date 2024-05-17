@@ -39,7 +39,6 @@ def generate_fake_arrow_data(cursor):
             pertaining_end_counter += 1
             if pertaining_end_counter == 6:
                 pertaining_end_counter = 0  # Reset counter for next round
-
     return data
 
 data = generate_fake_arrow_data(cursor)

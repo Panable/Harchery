@@ -15,12 +15,12 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE Competition (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    Name VARCHAR(255)
+    Name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Class (
-    AgeGroup VARCHAR(255),
-    Gender VARCHAR(255),
+    AgeGroup VARCHAR(255) NOT NULL,
+    Gender VARCHAR(255) NOT NULL,
     PRIMARY KEY (AgeGroup, Gender)
 );
 
@@ -30,58 +30,59 @@ CREATE TABLE Division (
 
 CREATE TABLE `Round` (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    Name VARCHAR(255),
-    `Range` INT,
-    TotalEnds INT,
-    Face INT
+    Name VARCHAR(255) NOT NULL,
+    `Range` INT NOT NULL,
+    TotalEnds INT NOT NULL,
+    Face INT NOT NULL,
+    UNIQUE (Name, `Range`, TotalEnds, Face)
 );
 
 CREATE TABLE Club (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    Name VARCHAR(255),
-    State VARCHAR(255)
+    Name VARCHAR(255) NOT NULL,
+    State VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Archer (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    FirstName VARCHAR(255),
-    LastName VARCHAR(255),
-    DOB DATE,
-    Gender VARCHAR(255),
-    ClubID INT,
+    FirstName VARCHAR(255) NOT NULL,
+    LastName VARCHAR(255) NOT NULL,
+    DOB DATE NOT NULL,
+    Gender VARCHAR(255) NOT NULL,
+    ClubID INT NOT NULL,
     FOREIGN KEY (ClubID) REFERENCES Club(ID)
 );
 
 CREATE TABLE RoundRecord (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    `Date` DATETIME,
-    RoundID INT,
-    Equipment VARCHAR(255),
-    ArcherID INT,
+    `Date` DATETIME NOT NULL,
+    RoundID INT NOT NULL,
+    Equipment VARCHAR(255) NOT NULL,
+    ArcherID INT NOT NULL,
     FOREIGN KEY (RoundID) REFERENCES `Round`(ID),
     FOREIGN KEY (Equipment) REFERENCES Division(Equipment),
     FOREIGN KEY (ArcherID) REFERENCES Archer(ID)
 );
 
 CREATE TABLE Staging (
-    RoundRecordID INT,
+    RoundRecordID INT NOT NULL,
     FOREIGN KEY (RoundRecordID) REFERENCES RoundRecord(ID)
 );
 
 CREATE TABLE Arrow (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    RoundRecordID INT,
-    PertainingEnd INT,
-    Score INT,
+    RoundRecordID INT NOT NULL,
+    PertainingEnd INT NOT NULL,
+    Score INT NOT NULL,
     FOREIGN KEY (RoundRecordID) REFERENCES RoundRecord(ID)
 );
 
 CREATE TABLE CompetitionDetails (
-    CompetitionID INT,
-    RoundID INT,
-    AgeGroup VARCHAR(255),
-    Gender VARCHAR(255),
-    Equipment VARCHAR(255),
+    CompetitionID INT NOT NULL,
+    RoundID INT NOT NULL,
+    AgeGroup VARCHAR(255) NOT NULL,
+    Gender VARCHAR(255) NOT NULL,
+    Equipment VARCHAR(255) NOT NULL,
     FOREIGN KEY (CompetitionID) REFERENCES Competition(ID),
     FOREIGN KEY (AgeGroup, Gender) REFERENCES Class(AgeGroup, Gender),
     FOREIGN KEY (Equipment) REFERENCES Division(Equipment),
@@ -89,14 +90,14 @@ CREATE TABLE CompetitionDetails (
 );
 
 CREATE TABLE CompetitionRecord (
-    RoundRecordID INT,
-    CompetitionID INT,
+    RoundRecordID INT NOT NULL,
+    CompetitionID INT NOT NULL,
     FOREIGN KEY (RoundRecordID) REFERENCES RoundRecord(ID)
 );
 
 CREATE TABLE Championship (
-    ClubID INT,
-    CompetitionID INT,
+    ClubID INT NOT NULL,
+    CompetitionID INT NOT NULL,
     FOREIGN KEY (ClubID) REFERENCES Club(ID),
     FOREIGN KEY (CompetitionID) REFERENCES Competition(ID)
 );

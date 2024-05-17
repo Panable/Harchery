@@ -33,7 +33,7 @@
 - [x] The participating rounds and scores have to be defined so that the results can be shown and the winners identified.
 > Just a database requirement. already done.
 
-- [ ] Determining an archer’s best score for a round
+- [x] Determining an archer’s best score for a round
 > Show all round records of an archer, filter unique highest scores for RoundID
 
 - [ ] The club’s best score for a round and the archer who shot it should also be an available lookup.

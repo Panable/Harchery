@@ -11,9 +11,10 @@
                 <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewScore>1. View archer's score</a><br>
                 <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewCompetitionResults>2. View competition result</a><br>
                 <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewChampionshipResults>3. View Championship result</a><br>
-                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewRounds>4. View round definitions</a><br>
-                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/stageScore/-1>5. Stage a new score</a><br>
-                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/enterScore/-1>6. Enter a new score</a><br>
+                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewClubBestScores>4. View_Club_results</a><br>
+                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/viewRounds>5. View round definitions</a><br>
+                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/stageScore/-1>6. Stage a new score</a><br>
+                <a class="link-secondary" href=<?php echo URLROOT; ?>archer/enterScore/-1>7. Enter a new score</a><br>
             </div>
         </div>
     </main>

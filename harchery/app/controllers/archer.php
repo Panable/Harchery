@@ -253,5 +253,42 @@ class archer extends controller
 
     }
 
+    public function viewClubBestScores() 
+    {
+        try {
+            // Check if the user is an archer
+            if (!isset($_SESSION['UserID']) || $_SESSION['UserType'] != 'Archer') {
+                echo "You are... uh not an archer?";
+                return;
+            }
+
+            // Get the archer ID
+            $archerID = $_SESSION['UserID'];
+
+            // Fetch the user's club ID based on the archer ID
+            $userClubID = $this->model->getClubIDByArcherID($archerID);
+
+            // Check if a club filter is applied, if not, use the user's club ID
+            $clubID = isset($_POST['clause_ClubID']) ? $_POST['clause_ClubID'] : $userClubID;
+
+            // Fetch top 10 best scores for the specified club, if any
+            $bestScores = $this->model->getClubTopScores($clubID, 10);
+
+            // Fetch all clubs for the dropdown
+            $clubs = $this->model->getAllClubs();
+
+            // Prepare data array to be passed to the view
+            $data = [
+                'BestScores' => $bestScores,
+                'UserClubID' => $userClubID,
+                'Clubs' => $clubs
+            ];
+
+            // Load the view and pass the data
+            $this->view('archer/view_club_rounds', $data);
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
 }
 

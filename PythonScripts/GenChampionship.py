@@ -9,7 +9,7 @@ fake = Faker()
 def generate_fake_championship_data(num_records):
     data = []
     used_competition_ids = set()  # Set is used to store unique competition IDs, to avoid duplicates
-    max_competition_id = 100  # Maximum competition ID
+    max_competition_id = 100  # Maximum competition ID, modify to value needed
     while len(used_competition_ids) < max_competition_id:
         club_id = random.randint(1, 150)
         while True:

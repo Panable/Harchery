@@ -311,7 +311,7 @@ class archermodel extends model
 
     public function getAllClubs() {
         try {
-            $sql = "SELECT ID, Name, State FROM Club";
+            $sql = "SELECT ID, Name, State FROM Club LIMIT 150";
             $this->db->query($sql);
             $data = $this->db->resultSet();
             return $data;

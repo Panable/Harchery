@@ -78,6 +78,9 @@ class archer extends controller
 
             // Retrieve form data from POST
             $formData = $_POST;
+            
+            // Check if Personal Best button was pressed
+            $isPersonalBest = isset($formData['personal_best']) && $formData['personal_best'] == '1';
 
             // Prepare array to store filter conditions
             $filters = [];
@@ -98,7 +101,7 @@ class archer extends controller
             $sortOptions = $this->extractSortOptions($formData);
 
             // Call the getScores method with archer ID, filter conditions, and sort options
-            $scores = $this->model->getScores($archer_id, $filters, $sortOptions);
+            $scores = $this->model->getScores($archer_id, $filters, $sortOptions, $isPersonalBest);
             $baseScores = $this->model->getBaseScores($archer_id);
 
             // Pass scores to the view

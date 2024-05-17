@@ -62,6 +62,8 @@
         <option value="DESC">Highest</option>
     </select>
 
+    <button type="submit" name="personal_best" value="1">Personal Best</button>
+
     <button type="submit">Submit</button>
 </form>
 
@@ -92,7 +94,6 @@
 <!-- TODO:  -->
 <!--  - Add a no record view for error handelling (James Python script protects against this) -->
 <!--  - Style Submit button -->
-<!--  - Change Sort preview -->
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
 <?php require APPROOT . '/views/inc/ender.php'; ?>

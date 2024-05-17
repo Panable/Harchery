@@ -5,11 +5,11 @@
 > Display each round record and total the score on each corresponding arrow
 
 
-- [ ] Restrict the number of scores by date range and by the type of round.
+- [x] Restrict the number of scores by date range and by the type of round.
 > CHANGE SQL QUERY ON VIEW
 
 
-- [ ] Score listings have to be able to be sorted by date and score (generally highest first).
+- [x] Score listings have to be able to be sorted by date and score (generally highest first).
 > CHANGE SQL QUERY ON VIEW
 
 
@@ -29,7 +29,7 @@
 > When click on specific championship, show all results (passing competitionid)
 > To show all results, use competitionid to get all competition records linking with round record and archer (tallying up their score like above)
 
-
+ 
 - [x] The participating rounds and scores have to be defined so that the results can be shown and the winners identified.
 > Just a database requirement. already done.
 

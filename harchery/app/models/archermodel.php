@@ -113,7 +113,7 @@ class archermodel extends model
     }
     
 
-    function getScores($archerID, $formData, $sortOptions = []) {
+    function getScores($archerID, $formData, $sortOptions = [], $isPersonalBest = false) {
         try {
             // Database query
             $score_sql = "SELECT * FROM ArcherRoundScores WHERE ArcherID=:archerID";
@@ -125,7 +125,21 @@ class archermodel extends model
             if (!empty($clauses)) {
                 $score_sql .= " AND " . implode(" AND ", $clauses);
             }
-
+        // Modify the query to get personal best if needed
+        if ($isPersonalBest) {
+            $score_sql = "
+                SELECT a.* 
+                FROM ArcherRoundScores a
+                INNER JOIN (
+                    SELECT RoundName, MAX(TotalScore) AS max_score
+                    FROM ArcherRoundScores
+                    WHERE ArcherID=:archerID
+                    GROUP BY RoundName
+                ) b
+                ON a.RoundName = b.RoundName AND a.TotalScore = b.max_score
+                WHERE a.ArcherID = :archerID
+            ";
+        }
             // Add sorting options to the SQL query
             if (!empty($sortOptions)) {
                 $orderByClauses = [];

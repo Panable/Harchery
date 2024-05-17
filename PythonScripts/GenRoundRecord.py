@@ -11,27 +11,25 @@ fake = Faker()
 equipment_options = ['Recurve', 'Compound', 'Recurve Barebow', 'Compound Barebow', 'Longbow']
 
 # Define the possible round formats for archery competitions
-Rounds = [
-    [1, 2, 3, 4],    # WA90/1440
-    [5, 6, 7],       # WA80/1440
-    [8, 9, 10],      # WA70/1440
-    [11, 12, 13],    # Junior Canberra
-    [14, 15, 16],    # Melbourne
-    [17, 18, 19],    # Long Sydney
-    [20, 21, 22],    # Sydney
-    [23, 24, 25],    # Long Brisbane
-    [26, 27, 28],    # Brisbane
-    [29, 30, 31],    # Adelaide
-    [32, 33],        # Short Adelaide
-    [34, 35, 36],    # WA60/1440
-    [37, 38, 39],    # WA55/1440
-    [40, 41, 42],    # WA50/1440
-    [43, 44, 45],    # WA45/1440
-    [46, 47, 48],    # WA40/1440
-    [49, 50],        # WA3/720
-    [51, 52, 53, 54] # FITA
-]
-
+Rounds = {
+    'WA90/1440': [1, 2, 3, 4],
+    'WA70/1440': [5, 6, 7],
+    'WA60/1440': [8, 9, 10, 11, 12],
+    'Junior Canberra': [13, 14, 15],
+    'Melbourne': [16, 17, 18],
+    'Long Sydney': [19, 20, 21],
+    'Sydney': [22, 23, 24],
+    'Long Brisbane': [25, 26],
+    'Brisbane': [27, 28, 29],
+    'Adelaide': [30, 31, 32],
+    'Short Adelaide': [33, 34],
+    'WA55/1440': [35, 36, 37],
+    'WA50/1440': [38, 39, 40],
+    'WA45/1440': [41, 42, 43],
+    'WA40/1440': [44, 45, 46],
+    'WA3/720': [47, 48],
+    'FITA': [49, 50, 51, 52]
+}
 
 # Function to load archer data from a CSV file
 def load_archer_data(file_path):
@@ -46,12 +44,10 @@ def load_archer_data(file_path):
             archer_data[club_id].append(archer_id)  # Append archer_id to the respective club's data
     return archer_data
 
-
 # Function to calculate age from date of birth
 def calculate_age(born):
     today = datetime.today()
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
-
 
 # Function to generate round records for archers within the time range of 8AM to 7PM
 def generate_round_records(num_records, archer_data):
@@ -77,7 +73,8 @@ def generate_round_records(num_records, archer_data):
             archer_dob = fake.date_time_between(start_date='-90y', end_date='-10y')
             age = calculate_age(archer_dob)
             if age >= 10 and age <= 90:
-                round_group = random.choice(Rounds)  # Randomly select a round format from Rounds
+                format_name = random.choice(list(Rounds.keys()))  # Randomly select a format
+                round_group = Rounds[format_name]  # Get the round IDs for the selected format
                 equipment = random.choice(equipment_options)  # Randomly select equipment for the archer
 
                 # Increment time by 2 to 4 minutes per archer
@@ -93,14 +90,11 @@ def generate_round_records(num_records, archer_data):
                     round_records.append((last_date.strftime('%Y-%m-%d %H:%M:%S'), round_id, equipment, archer_id))
     return round_records
 
-
-
 # Load archer data from CSV file
 archer_data = load_archer_data('fake_Archer.csv')
 
 # Example: Generate RoundRecord data
 round_records_data = generate_round_records(200, archer_data)
-
 
 # Function to write generated RoundRecord entries to SQL file
 def write_round_records_to_sql(file_path, round_records):

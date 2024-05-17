@@ -1,7 +1,9 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
+
 <div class="d-flex flex-column justify-content-between min-vh-100">
     <?php require APPROOT . '/views/inc/navbar.php'; ?>
+    <h1 style="color:white; text-align:center">You're not doing anything for charity nor taking part in a beauty contest - don't worry about the aesthetics - Afzaal</h1>
     <main role="main" class="flex-grow-1 overflow-auto d-flex justify-content-center align-items-center">
         <div class="container">
             <div class="row justify-content-center">

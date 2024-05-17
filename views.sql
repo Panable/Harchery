@@ -6,6 +6,7 @@ DROP VIEW IF EXISTS EquivalentRoundsView;
 DROP VIEW IF EXISTS SimplifiedEquivalentRoundsView;
 DROP VIEW IF EXISTS StagedRounds;
 DROP VIEW IF EXISTS EquivalentRound;
+DROP VIEW IF EXISTS ChampionshipScores;
 
 -- By Max
 -- Requirement
@@ -79,6 +80,17 @@ LEFT JOIN
     Staging S ON RR.ID = S.RoundRecordID AND S.RoundRecordID IS NULL
 GROUP BY
     C.ID, C.Name, A.ID;
+
+CREATE VIEW ChampionshipScores AS
+SELECT 
+    CAS.CompetitionID,
+    CAS.CompetitionName,
+    CAS.ArcherFullName,
+    CAS.ArcherScore
+FROM 
+    CompetitionArcherScores CAS
+JOIN 
+    Championship CH ON CAS.CompetitionID = CH.CompetitionID;
 
 CREATE VIEW StagedRounds AS
 SELECT 

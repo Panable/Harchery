@@ -103,7 +103,12 @@ CREATE TABLE Championship (
     FOREIGN KEY (CompetitionID) REFERENCES Competition(ID)
 );
 
-CREATE INDEX idx_arr_rr_id ON Arrow (RoundRecordID);
-CREATE INDEX idx_rr_archer_name ON RoundRecord(ArcherID);
-CREATE INDEX idx_round_name ON Round(Name);
-CREATE INDEX idx_round_range ON Round(`Range`);
+
+CREATE INDEX idx_roundrecord_roundid ON RoundRecord(RoundID);
+CREATE INDEX idx_roundrecord_archerid ON RoundRecord(ArcherID);
+CREATE INDEX idx_roundrecord_date ON RoundRecord(Date);
+CREATE INDEX idx_arrow_roundrecordid ON Arrow(RoundRecordID);
+CREATE INDEX idx_competitiondetails_competitionid ON CompetitionDetails(CompetitionID);
+CREATE INDEX idx_competitiondetails_roundid ON CompetitionDetails(RoundID);
+CREATE INDEX idx_competitiondetails_agegroup_gender ON CompetitionDetails(AgeGroup, Gender);
+CREATE INDEX idx_competitiondetails_equipment ON CompetitionDetails(Equipment);

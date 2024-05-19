@@ -2,7 +2,7 @@
 <?php require APPROOT . '/views/inc/navbar.php'; ?>
 
 <div class="card-body text-center overflow bg-dark text-white p-4 m-5 rounded-3">
-    <main role="main" class="flex-grow-1 overflow-scroll d-flex flex-column align-items-center justify-content-center" style="color: white; text-align:center;">
+    <main role="main" class="flex-grow-1 d-flex flex-column align-items-center justify-content-center" style="color: white; text-align:center;">
 
         <h1>Championship Results</h1>
         <!-- Search form for Club ID -->

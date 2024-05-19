@@ -2,6 +2,13 @@
 An Archery website built my Dhanveer, James, Maximum and Sanya for Bachelors of Computer Science (Design Project)
 
 ## Running SQL Queries:
+
+You are also going to need the following python dependencies to initialize the database:
+
+```
+python-faker
+python-mysql-connector
+```
 Just modify init.sql and run
 ```
 ./exec_query.sh
